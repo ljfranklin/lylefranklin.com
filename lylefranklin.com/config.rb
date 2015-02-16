@@ -45,6 +45,10 @@ configure :build do
 
   activate :minify_javascript
 
+  activate :minify_html
+
+  activate :gzip
+
   activate :asset_hash
 
   activate :relative_assets

@@ -1,0 +1,7 @@
+---
+applications:
+- name: homepage
+  host: homepage-lfranklin
+  memory: 64M
+  path: build
+  buildpack: https://github.com/cloudfoundry-incubator/staticfile-buildpack
