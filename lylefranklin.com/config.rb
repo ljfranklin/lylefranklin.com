@@ -1,52 +1,4 @@
-###
-# Compass
-###
-
-# Change Compass configuration
-# compass_config do |config|
-#   config.output_style = :compact
-# end
-
-###
-# Page options, layouts, aliases and proxies
-###
-
-# Per-page layout changes:
-#
-# With no layout
-# page "/path/to/file.html", :layout => false
-#
-# With alternative layout
-# page "/path/to/file.html", :layout => :otherlayout
-#
-# A path which all have the same layout
-# with_layout :admin do
-#   page "/admin/*"
-# end
-
-# Proxy pages (http://middlemanapp.com/basics/dynamic-pages/)
-# proxy "/this-page-has-no-template.html", "/template-file.html", :locals => {
-#  :which_fake_page => "Rendering a fake page with a local variable" }
-
-###
-# Helpers
-###
-
-# Automatic image dimensions on image_tag helper
-# activate :automatic_image_sizes
-
-# Reload the browser automatically whenever files change
-# configure :development do
-#  activate :livereload
-#end
-
-# Methods defined in the helpers block are available in templates
-# helpers do
-#   def some_helper
-#     "Helping"
-#   end
-# end
-
+# Setup directory structure
 set :css_dir, 'stylesheets'
 
 set :js_dir, 'javascripts'
@@ -63,7 +15,7 @@ sprockets.append_path File.join root, bower_directory
 # Build search patterns
 patterns = [
   '.png',  '.gif', '.jpg', '.jpeg', '.svg', # Images
-  '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
+  '.eot',  '.otf', '.svc', '.woff', '.woff2', '.ttf', # Fonts
   '.js',                                    # Javascript
 ].map { |e| File.join(bower_directory, "**", "*#{e}" ) }
 
@@ -77,6 +29,11 @@ end.each do |f|
   # Import relative paths
   sprockets.import_asset(Pathname.new(f).relative_path_from(Pathname.new(bower_directory)))
 end
+
+# Precompile Bootstrap fonts
+# sprockets.assets.precompile << %r(bootstrap-sass/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
+# Minimum Sass number precision required by bootstrap-sass
+::Sass::Script::Number.precision = [8, ::Sass::Script::Number.precision].max
 
 # Layouts
 set :layout, false
