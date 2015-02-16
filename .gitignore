@@ -1,0 +1,8 @@
+# Vagrant
+.vagrant/
+
+# Middleman
+lylefranklin.com/build/
+
+# Vim
+*.swp
