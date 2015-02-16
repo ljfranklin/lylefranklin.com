@@ -5,6 +5,8 @@ set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
 
+set :debug_assets, true
+
 # Import Bower assests
 require 'rake/file_list'
 require 'pathname'
@@ -30,8 +32,6 @@ end.each do |f|
   sprockets.import_asset(Pathname.new(f).relative_path_from(Pathname.new(bower_directory)))
 end
 
-# Precompile Bootstrap fonts
-# sprockets.assets.precompile << %r(bootstrap-sass/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
 # Minimum Sass number precision required by bootstrap-sass
 ::Sass::Script::Number.precision = [8, ::Sass::Script::Number.precision].max
 
@@ -41,18 +41,11 @@ page "pages/*", :layout => :page_layout
 
 # Build-specific configuration
 configure :build do
-  # For example, change the Compass output style for deployment
-  # activate :minify_css
+  activate :minify_css
 
-  # Minify Javascript on build
-  # activate :minify_javascript
+  activate :minify_javascript
 
-  # Enable cache buster
-  # activate :asset_hash
+  activate :asset_hash
 
-  # Use relative URLs
-  # activate :relative_assets
-
-  # Or use a different image path
-  # set :http_prefix, "/Content/images/"
+  activate :relative_assets
 end
