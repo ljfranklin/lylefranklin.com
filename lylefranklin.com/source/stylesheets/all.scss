@@ -15,10 +15,37 @@ body {
   text-align: center;
   font-family: sans-serif; 
   height: 100%;
-  overflow: auto;
   box-sizing: border-box;
 }
 
+.nav-bar {
+  
+  width: 100%;
+  background-color: #9A9A9A;
+  color: #fdfdfd;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+
+  .nav-home {
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  .nav-link {
+      padding: 10px 70px;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    flex-grow: 1;
+  }
+}
+//Transitions adapted from https://github.com/codrops/PageTransitions
 .pt-perspective {
     position: relative;
     width: 100%;
@@ -26,6 +53,7 @@ body {
     perspective: 1200px;
     transform-style: preserve-3d;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .pt-page, .reveal-animation {

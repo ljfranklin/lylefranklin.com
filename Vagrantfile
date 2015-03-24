@@ -9,6 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   config.vm.network "forwarded_port", guest: 4567, host: 4567
 
+  config.vm.synced_folder ".", "/vagrant", type: "rsync"
   # mount scripts so they can be referenced by other scripts
   config.vm.synced_folder "install-scripts", "/home/vagrant/install-scripts"
 
