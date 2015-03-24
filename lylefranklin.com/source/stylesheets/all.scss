@@ -21,21 +21,28 @@ body {
 .nav-bar {
   
   width: 100%;
-  background-color: #9A9A9A;
-  color: #fdfdfd;
+  background-color: #2f0b24;
   font-size: 18px;
   font-weight: 700;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
 
-  .nav-home {
+  .nav-home.nav-link {
     flex-grow: 1;
     text-align: left;
+
+    a {
+      color: #8ae234;
+    }
   }
 
   .nav-link {
       padding: 10px 70px;
+
+      a {
+          color: #3465A4;
+      }
   }
 
   .nav-links {
