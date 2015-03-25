@@ -13,7 +13,13 @@ angular.module('homepageApp', [
     .when('/about', {
       templateUrl: '/pages/about.html'
     })
-    .when('/', {
+   .when('/work', {
+      templateUrl: '/pages/work.html'
+    })
+   .when('/resume', {
+      templateUrl: '/pages/resume.html'
+    })
+   .when('/', {
       templateUrl: '/pages/home.html'
     });
 }]);
