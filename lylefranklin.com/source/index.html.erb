@@ -8,7 +8,12 @@
     
     <!-- Use title if it's in the page YAML frontmatter -->
     <title><%= current_page.data.title || "The Middleman" %></title>
-    
+
+    <% pages = get_templates("pages") %>
+    <% pages.each do |page_partial| %> 
+      <%= partial_with_layout page_partial, :page_layout %>
+    <% end %>
+
     <%= stylesheet_link_tag "normalize", "all" %>
     <%= javascript_include_tag  "all" %>
   </head>
