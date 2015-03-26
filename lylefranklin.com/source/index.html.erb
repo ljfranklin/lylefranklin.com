@@ -11,7 +11,9 @@
 
     <% pages = get_templates("pages") %>
     <% pages.each do |page_partial| %> 
-      <%= partial_with_layout page_partial, :page_layout %>
+      <% wrap_layout :ng_template_layout do %>
+        <%= partial_with_layout page_partial, :page_layout %>
+      <% end %>
     <% end %>
 
     <%= stylesheet_link_tag "normalize", "all" %>
