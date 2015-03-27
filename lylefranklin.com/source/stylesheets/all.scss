@@ -1,10 +1,5 @@
 @charset "utf-8";
 
-//import bootstrap
-$icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
-@import "bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
-@import "bootstrap-sass/assets/stylesheets/bootstrap";
-
 html {
   height: 100%;
   box-sizing: border-box;
@@ -52,6 +47,7 @@ body {
     flex-grow: 1;
   }
 }
+
 //Transitions adapted from https://github.com/codrops/PageTransitions
 .pt-perspective {
     position: relative;

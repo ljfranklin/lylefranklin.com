@@ -1,4 +1,3 @@
-//= require "angular/angular.min.js"
 //= require "angular-route/angular-route.min.js"
 //= require "angular-animate/angular-animate.min.js"
 //= require_tree .
