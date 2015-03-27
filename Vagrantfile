@@ -9,7 +9,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   config.vm.network "forwarded_port", guest: 4567, host: 4567
 
-  config.vm.synced_folder ".", "/vagrant", type: "rsync"
+  # need to use nfs due file watcher bug in synced folders
+  config.vm.network "private_network", ip: "192.168.50.5"
+  config.vm.synced_folder ".", "/vagrant", type: "nfs"
+
   # mount scripts so they can be referenced by other scripts
   config.vm.synced_folder "install-scripts", "/home/vagrant/install-scripts"
 
