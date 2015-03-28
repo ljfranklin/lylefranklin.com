@@ -5,8 +5,6 @@ set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
 
-set :debug_assets, true
-
 # Import Bower assests
 require 'rake/file_list'
 require 'pathname'
@@ -31,9 +29,6 @@ end.each do |f|
   # Import relative paths
   sprockets.import_asset(Pathname.new(f).relative_path_from(Pathname.new(bower_directory)))
 end
-
-# Minimum Sass number precision required by bootstrap-sass
-::Sass::Script::Number.precision = [8, ::Sass::Script::Number.precision].max
 
 # Layouts
 set :layout, false
@@ -60,14 +55,17 @@ helpers do
   end
 end
 
-# Build-specific configuration
+configure :development do
+  set :debug_assets, true
+end
+
 configure :build do
+
+  activate :minify_html
 
   activate :minify_css
 
   activate :minify_javascript
-
-  activate :minify_html
 
   activate :gzip
 
