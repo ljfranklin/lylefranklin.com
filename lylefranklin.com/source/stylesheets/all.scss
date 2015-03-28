@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+@import 'normalize';
+
 html {
   height: 100%;
   box-sizing: border-box;
@@ -73,13 +75,13 @@ body {
 .reveal-animation {
 
     &.ng-enter {
-        -webkit-animation: rotateSlideIn 1s both ease;
-        animation: rotateSlideIn 1s both ease;
+        -webkit-animation: rotateSlideIn .5s both ease;
+        animation: rotateSlideIn .5s both ease;
     }
 
     &.ng-leave {
-        -webkit-animation: rotateSlideOut 1s both ease;
-        animation: rotateSlideOut 1s both ease;
+        -webkit-animation: rotateSlideOut .5s both ease;
+        animation: rotateSlideOut .5s both ease;
     }
 }
 
