@@ -50,13 +50,10 @@ body {
   }
 }
 
-//Transitions adapted from https://github.com/codrops/PageTransitions
-.pt-perspective {
+.page-container {
     position: relative;
     width: 100%;
     height: 100%;
-    perspective: 1200px;
-    transform-style: preserve-3d;
     box-sizing: border-box;
     overflow: hidden;
 }
@@ -68,43 +65,52 @@ body {
     top: 0;
     left: 0;
     overflow: hidden;
-    transform: translate3d(0, 0, 0);
+    transform: translate(0, 0);
     box-sizing: border-box;
 }
 
+//Transitions adapted from https://github.com/codrops/PageTransitions
 .reveal-animation {
 
     &.ng-enter {
-        -webkit-animation: rotateSlideIn .5s both ease;
-        animation: rotateSlideIn .5s both ease;
+        -webkit-animation: moveFromRight .6s ease both;
+        animation: moveFromRight .6s ease both;
     }
 
     &.ng-leave {
-        -webkit-animation: rotateSlideOut .5s both ease;
-        animation: rotateSlideOut .5s both ease;
+        -webkit-animation: moveToLeft .6s ease both;
+        animation: moveToLeft .6s ease both;
     }
 }
 
-@-webkit-keyframes rotateSlideOut {
-    0% { }
-    25% { opacity: .5; -webkit-transform: translateZ(-500px); }
-    75% { opacity: .5; -webkit-transform: translateZ(-500px) translateX(-200%); }
-    100% { opacity: .5; -webkit-transform: translateZ(-500px) translateX(-200%); }
+@-webkit-keyframes moveToLeft {
+    from { }
+    to { -webkit-transform: translateX(-100%); }
 }
-@keyframes rotateSlideOut {
-    0% { }
-    25% { opacity: .5; -webkit-transform: translateZ(-500px); transform: translateZ(-500px); }
-    75% { opacity: .5; -webkit-transform: translateZ(-500px) translateX(-200%); transform: translateZ(-500px) translateX(-200%); }
-    100% { opacity: .5; -webkit-transform: translateZ(-500px) translateX(-200%); transform: translateZ(-500px) translateX(-200%); }
+@keyframes moveToLeft {
+    from { }
+    to { -webkit-transform: translateX(-100%); transform: translateX(-100%); }
 }
 
-@-webkit-keyframes rotateSlideIn {
-    0%, 25% { opacity: .5; -webkit-transform: translateZ(-500px) translateX(200%); }
-    75% { opacity: .5; -webkit-transform: translateZ(-500px); }
-    100% { opacity: 1; -webkit-transform: translateZ(0) translateX(0); }
+@-webkit-keyframes moveFromLeft {
+    from { -webkit-transform: translateX(-100%); }
 }
-@keyframes rotateSlideIn {
-    0%, 25% { opacity: .5; -webkit-transform: translateZ(-500px) translateX(200%); transform: translateZ(-500px) translateX(200%); }
-    75% { opacity: .5; -webkit-transform: translateZ(-500px); transform: translateZ(-500px); }
-    100% { opacity: 1; -webkit-transform: translateZ(0) translateX(0); transform: translateZ(0) translateX(0); }
+@keyframes moveFromLeft {
+    from { -webkit-transform: translateX(-100%); transform: translateX(-100%); }
+}
+
+@-webkit-keyframes moveToRight { 
+    from { }
+    to { -webkit-transform: translateX(100%); }
+}
+@keyframes moveToRight { 
+    from { }
+    to { -webkit-transform: translateX(100%); transform: translateX(100%); }
+}
+
+@-webkit-keyframes moveFromRight {
+    from { -webkit-transform: translateX(100%); }
+}
+@keyframes moveFromRight {
+    from { -webkit-transform: translateX(100%); transform: translateX(100%); }
 }
