@@ -16,7 +16,6 @@
       <% end %>
     <% end %>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <%= stylesheet_link_tag "all" %>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
@@ -24,27 +23,26 @@
   </head>
   
   <body class="<%= page_classes %>">
-    <div class="nav-bar">
-      <div class="nav-link nav-home">
-        <a href="/#/">
-          lyle:~$
-        </a>
-      </div>
-      <div class="nav-links">
-        <div class="nav-link">
-          <a href="/#/work">
-            work
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/#/" class="navbar-brand">
+            lyle:~$
           </a>
         </div>
-        <div class="nav-link">
-          <a href="/#/resume">
-            resume
-          </a>
-        </div>
-        <div class="nav-link">
-          <a href="/#/about">
-            about
-          </a>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/#/about">
+                About
+              </a>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/#/work">
+                Work
+              </a>
+          </ul>
         </div>
       </div>
     </div>
