@@ -1,8 +1,11 @@
 @charset "utf-8";
 
-@import '_normalize';
+@import 'normalize.css/normalize';
 
 @import 'theme_superhero/_variables';
+// keep nav items on one line on mobile screens
+$grid-float-breakpoint: 0;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import 'theme_superhero/_bootswatch';
