@@ -17,5 +17,3 @@ gem "therubyracer"
 
 # Used to import Bower assests
 gem "rake"
-
-gem 'bootstrap-sass', '~> 3.3.4'

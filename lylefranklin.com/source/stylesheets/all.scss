@@ -6,8 +6,10 @@
 // keep nav items on one line on mobile screens
 $grid-float-breakpoint: 0;
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
+$icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
+@import "bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
+@import "bootstrap-sass/assets/stylesheets/bootstrap";
+
 @import 'theme_superhero/_bootswatch';
 
 html {
@@ -26,6 +28,14 @@ body {
     .navbar-brand {
         font-size: 150%;
         line-height: 75%;
+    }
+}
+
+.btn-block {
+    text-align: left;
+
+    span {
+        margin-right: 14px;
     }
 }
 
