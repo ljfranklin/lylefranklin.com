@@ -7,9 +7,29 @@ set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
 
+set :fonts_dir,  'bower_components/bootstrap-sass/fonts/bootstrap'
+
 # Import Bower assests
 bower_directory = 'bower_components'
 sprockets.append_path File.join root, bower_directory
+
+# Build search patterns
+patterns = [
+  '.png',  '.gif', '.jpg', '.jpeg', '.svg', # Images
+  '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
+  '.js',                                    # Javascript
+].map { |e| File.join(bower_directory, "**", "*#{e}" ) }
+
+# Create file list and exclude unwanted files
+Rake::FileList.new(*patterns) do |l|
+  l.exclude(/src/)
+  l.exclude(/test/)
+  l.exclude(/demo/)
+  l.exclude { |f| !File.file? f }
+end.each do |f|
+  # Import relative paths
+  sprockets.import_asset(Pathname.new(f).relative_path_from(Pathname.new(bower_directory)))
+end
 
 # Layouts
 set :layout, false
