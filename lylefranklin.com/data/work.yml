@@ -1,0 +1,28 @@
+descriptions:
+- id: pivotal
+  name: Pivotal
+  company_link: http://pivotal.io/platform-as-a-service/pivotal-cloud-foundry
+  image: pivotal.png
+  position: Software Engineer
+  start_date: "Jan '15"
+  end_date: Present
+  location: San Francisco, CA
+  text: >
+    I work on Cloud Foundry, an open source Platform as a Service.
+    My current team builds an automated 
+    <a href="https://github.com/cloudfoundry/cf-mysql-release"
+      target="_blank">
+      MySQL cluster
+    </a>
+    with custom high-availability components.
+- id: ibm
+  name: IBM
+  company_link: http://www-01.ibm.com/employment/us/extremeblue/
+  image: ibm.png
+  position: Technical Intern
+  start_date: "May '14"
+  end_date: "Aug '14"
+  location: Austin, TX
+  text: >
+    Worked with two other tech interns and an MBA under the IBM's Emerging Technology group.
+    Together we built a system to allow non-technical users to deploy solutions to IBM's Bluemix cloud hosting service.

@@ -53,10 +53,17 @@ body {
     box-sizing: border-box;
 }
 
-.media-heading {
-   small {
-        display: block;
-   }
+.media {
+    .thumbnail {
+        background-color: #ebebeb;
+        margin-right: 15px;
+    }
+    .media-heading {
+        small {
+            margin-top: 4px;
+            display: block;
+        }
+    }
 }
 
 //Transitions adapted from https://github.com/codrops/PageTransitions

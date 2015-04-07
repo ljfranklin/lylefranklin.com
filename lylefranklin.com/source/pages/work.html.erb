@@ -1,73 +1,24 @@
 <h1>
   WORK
 </h1>
+<% data.work.descriptions.each do |w| %>
 <div class="media">
   <div class="media-left">
-    <a href="/#/work/pivotal">
-      <img class="media-object thumbnail" src="/images/cloud-foundry-logo.png">
-    </a>
+    <img class="media-object thumbnail" src="/images/<%= w.image %>">
   </div>
   <div class="media-body">
     <h4 class="media-heading">
-      <a href="/#/work/pivotal">
-        Pivotal
+      <a href="<%= w.company_link %>" target="_blank">
+        <%= w.name %>
       </a>
       <small>
-        Software Engineer
+        <%= w.position %>
       </small>
       <small>
-        Jan '15 - Present | San Francisco, CA
+        <%= "#{w.start_date} - #{w.end_date} | #{w.location}" %>
       </small>
     </h4>
-    I work on Cloud Foundry, an open source Platform as a Service.
-    My current team builds an automated 
-    <a href="https://github.com/cloudfoundry/cf-mysql-release">
-      MySQL cluster
-    </a> with custom high-availability components.
+    <%= w.text %>
   </div>
 </div>
-<div class="media">
-  <div class="media-left">
-    <a href="/#/work/ibm">
-      <img class="media-object" src="<%= lorem.image('128x128') %>">
-    </a>
-  </div>
-  <div class="media-body">
-    <h4 class="media-heading">
-      <a href="/#/work/ibm">
-        IBM
-      </a>
-    </h4>
-    <%= lorem.paragraphs 1 %>
-  </div>
-</div>
-<div class="media">
-  <div class="media-left">
-    <a href="/#/work/inin">
-      <img class="media-object" src="<%= lorem.image('128x128') %>">
-    </a>
-  </div>
-  <div class="media-body">
-    <h4 class="media-heading">
-      <a href="/#/work/inin">
-        Interactive Intelligence
-      </a>
-    </h4>
-    <%= lorem.paragraphs 1 %>
-  </div>
-</div>
-<div class="media">
-  <div class="media-left">
-    <a href="/#/work/uiuc">
-      <img class="media-object" src="<%= lorem.image('128x128') %>">
-    </a>
-  </div>
-  <div class="media-body">
-    <h4 class="media-heading">
-      <a href="/#/work/uiuc">
-        University of Illinois @ Urbana Champaign
-      </a>
-    </h4>
-    <%= lorem.paragraphs 1 %>
-  </div>
-</div>
+<% end %>
