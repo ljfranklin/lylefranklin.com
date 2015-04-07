@@ -53,6 +53,12 @@ body {
     box-sizing: border-box;
 }
 
+.media-heading {
+   small {
+        display: block;
+   }
+}
+
 //Transitions adapted from https://github.com/codrops/PageTransitions
 .reveal-animation {
     width: 100%;
