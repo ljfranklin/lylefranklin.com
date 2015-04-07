@@ -6,6 +6,8 @@ set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
+# Don't build orig images
+ignore "images/*.orig.*"
 
 # Import Bower assests
 bower_directory = 'bower_components'
