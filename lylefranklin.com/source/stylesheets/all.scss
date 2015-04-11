@@ -33,6 +33,9 @@ body {
 
 .btn-block {
     text-align: left;
+    + .btn-block {
+        margin-top: 20px;
+    }
 
     i, span {
         margin-right: 14px;
