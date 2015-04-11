@@ -19,10 +19,45 @@ descriptions:
   name: IBM
   company_link: http://www-01.ibm.com/employment/us/extremeblue/
   image: ibm.png
-  position: Technical Intern
+  position: Extreme Blue Intern
   start_date: "May '14"
   end_date: "Aug '14"
   location: Austin, TX
   text: >
-    Worked with two other tech interns and an MBA under the IBM's Emerging Technology group.
-    Together we built a system to allow non-technical users to deploy solutions to IBM's Bluemix cloud hosting service.
+    Worked with two other tech interns and an MBA under IBM's Emerging Technology group.
+    Together we
+    <a href="/#/work/ibm/">
+    built a system
+    </a>
+    to allow non-technical users to deploy solutions to IBM's Bluemix cloud hosting service.
+- id: inin
+  name: Interactive Intelligence
+  company_link: http://www.inin.com/
+  image: inin.jpg
+  position: Application Developer
+  start_date: "Dec '12"
+  end_date: "July '13"
+  location: Indianapolis, IN
+  text: >
+    Designed and implemented internal business tools used by hundreds of employees.
+    Collaborated with engineers, sales, and management to streamline interactions between teams through custom process automation tools.
+- id: uiuc
+  name: University of Illinois @ Urbana-Champaign
+  company_link: http://cs.illinois.edu/
+  image: uiuc.png
+  position: Software Engineering Researcher
+  start_date: "May '12"
+  end_date: "Aug '12"
+  location: Urbana, IL
+  text: >
+    Developed a
+    <a href="http://www.youtube.com/watch?v=EIyAflgHVpU&hd=1" target="_blank">
+    refactoring plugin
+    </a>
+    for the NetBeans IDE to automatically convert existing code to use Java 8 lambda expressions.
+    This plugin was accepted as an official patch to the NetBeans source code.
+    We
+    <a href="http://dig.cs.illinois.edu/papers/lambdaRefactoring.pdf" target="_blank">
+    published a paper
+    </a>
+    detailing development and applicability of the refactorings.
