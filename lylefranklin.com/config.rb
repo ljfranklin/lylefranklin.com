@@ -16,6 +16,7 @@ sprockets.append_path File.join root, bower_directory
 # Layouts
 set :layout, false
 page "pages/*", :layout => :page_layout
+page "pages/work/*", :layout => :nested_layout
 
 helpers do
   def get_templates(dirname='')

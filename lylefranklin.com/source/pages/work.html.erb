@@ -2,23 +2,30 @@
   WORK
 </h1>
 <% data.work.descriptions.each do |w| %>
-<div class="media">
-  <div class="media-left">
-    <img class="media-object thumbnail" src="/images/<%= w.image %>">
+<div class="media panel panel-default">
+  <div class="panel-body">
+    <div class="media-left">
+      <img class="media-object thumbnail" src="/images/<%= w.image %>">
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">
+        <a href="<%= w.company_link %>" target="_blank">
+          <%= w.name %>
+        </a>
+        <small>
+          <%= w.position %>
+        </small>
+        <small>
+          <%= "#{w.start_date} - #{w.end_date} | #{w.location}" %>
+        </small>
+      </h4>
+      <%= w.text %>
+    </div>
   </div>
-  <div class="media-body">
-    <h4 class="media-heading">
-      <a href="<%= w.company_link %>" target="_blank">
-        <%= w.name %>
-      </a>
-      <small>
-        <%= w.position %>
-      </small>
-      <small>
-        <%= "#{w.start_date} - #{w.end_date} | #{w.location}" %>
-      </small>
-    </h4>
-    <%= w.text %>
-  </div>
+  <% if (w.extras) then %>
+    <div class="extras panel-footer">
+      <%= w.extras %>
+    </div>
+  <% end %>
 </div>
 <% end %>

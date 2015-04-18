@@ -12,11 +12,6 @@ angular.module('homepageApp', [
     .when('/about', {
       templateUrl: '/pages/about.html'
     })
-   .when('/work/:name', {
-      templateUrl: function(attrs) {
-        return '/pages/work/' + attrs.name + '.html';
-      }
-    })
    .when('/work', {
       templateUrl: '/pages/work.html'
     })

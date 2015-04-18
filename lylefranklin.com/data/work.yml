@@ -25,11 +25,18 @@ descriptions:
   location: Austin, TX
   text: >
     Worked with two other tech interns and an MBA under IBM's Emerging Technology group.
-    Together we
-    <a href="/#/work/ibm/">
-    built a system
-    </a>
-    to allow non-technical users to deploy solutions to IBM's Bluemix cloud hosting service.
+    Together we built a system to allow non-technical users to deploy solutions to IBM's Bluemix cloud hosting service.
+  extras: >
+    <div
+      ng-click="showIbmVideo = !showIbmVideo"
+      ng-init="showIbmVideo = false"
+      class="btn btn-info btn-sm">
+      Video
+      <i class="fa fa-chevron-down"></i>
+    </div>
+    <div ng-if="showIbmVideo">
+      <div ng-include="'/pages/work/ibm.html'"></div>
+    </div>
 - id: inin
   name: Interactive Intelligence
   company_link: http://www.inin.com/
