@@ -24,7 +24,9 @@
   </head>
   
   <body class="<%= page_classes %>">
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div
+      class="navbar navbar-inverse navbar-fixed-top"
+      ng-controller="NavCtrl">
       <div class="container">
         <div class="navbar-header">
           <a href="/#/" class="navbar-brand">
@@ -47,17 +49,17 @@
           <ul
             class="nav navbar-nav navbar-right"
             ng-click="navCollapsed = true">
-            <li>
+            <li ng-class="{'active': isActivePage('work')}">
               <a href="/#/work">
                 Work
               </a>
             </li>
-            <li>
+            <li ng-class="{'active': isActivePage('resume')}">
               <a href="/#/resume">
                 Resume
               </a>
             </li>
-            <li>
+            <li ng-class="{'active': isActivePage('about')}">
               <a href="/#/about">
                 About
               </a>

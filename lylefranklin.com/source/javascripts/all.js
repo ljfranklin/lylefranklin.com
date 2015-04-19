@@ -21,4 +21,9 @@ angular.module('homepageApp', [
    .when('/', {
       templateUrl: '/pages/home.html'
     });
+}])
+.controller('NavCtrl', ['$scope', '$location', function($scope, $location) {
+  $scope.isActivePage = function(pageName) {
+    return $location.path() === '/' + pageName;
+  };
 }]);
