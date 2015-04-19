@@ -1,7 +1,6 @@
 descriptions:
 - id: pivotal
   name: Pivotal
-  company_link: http://pivotal.io/platform-as-a-service/pivotal-cloud-foundry
   image: pivotal.png
   position: Software Engineer
   start_date: "Jan '15"
@@ -9,15 +8,24 @@ descriptions:
   location: San Francisco, CA
   text: >
     I work on Cloud Foundry, an open source Platform as a Service.
-    My current team builds an automated 
-    <a href="https://github.com/cloudfoundry/cf-mysql-release"
-      target="_blank">
-      MySQL cluster
+    My current team builds an automated MySQL cluster with custom high-availability components.
+  extras: >
+    <a
+      href="http://pivotal.io/platform-as-a-service/pivotal-cloud-foundry"
+      target="_blank"
+      class="btn btn-primary btn-sm">
+      Cloud Foundry
+      <i class="fa fa-external-link"></i>
     </a>
-    with custom high-availability components.
+    <a
+      href="https://github.com/cloudfoundry/cf-mysql-release"
+      target="_blank"
+      class="btn btn-primary btn-sm">
+      MySQL Cluster
+      <i class="fa fa-external-link"></i>
+    </a>
 - id: ibm
   name: IBM
-  company_link: http://www-01.ibm.com/employment/us/extremeblue/
   image: ibm.png
   position: Extreme Blue Intern
   start_date: "May '14"
@@ -30,16 +38,22 @@ descriptions:
     <div
       ng-click="showIbmVideo = !showIbmVideo"
       ng-init="showIbmVideo = false"
-      class="btn btn-info btn-sm">
+      class="btn btn-primary btn-sm">
       Video
       <i class="fa fa-chevron-down"></i>
     </div>
+    <a
+      href="http://www-01.ibm.com/employment/us/extremeblue/"
+      target="_blank"
+      class="btn btn-primary btn-sm">
+      Extreme Blue
+      <i class="fa fa-external-link"></i>
+    </a>
     <div ng-if="showIbmVideo">
       <div ng-include="'/pages/work/ibm.html'"></div>
     </div>
 - id: inin
   name: Interactive Intelligence
-  company_link: http://www.inin.com/
   image: inin.jpg
   position: Application Developer
   start_date: "Dec '12"
@@ -48,23 +62,47 @@ descriptions:
   text: >
     Designed and implemented internal business tools used by hundreds of employees.
     Collaborated with engineers, sales, and management to streamline interactions between teams through custom process automation tools.
+  extras: >
+    <a
+      href="http://www.inin.com"
+      target="_blank"
+      class="btn btn-primary btn-sm">
+      ININ
+      <i class="fa fa-external-link"></i>
+    </a>
 - id: uiuc
   name: University of Illinois @ Urbana-Champaign
-  company_link: http://cs.illinois.edu/
   image: uiuc.png
   position: Software Engineering Researcher
   start_date: "May '12"
   end_date: "Aug '12"
   location: Urbana, IL
   text: >
-    Developed a
-    <a href="http://www.youtube.com/watch?v=EIyAflgHVpU&hd=1" target="_blank">
-    refactoring plugin
-    </a>
-    for the NetBeans IDE to automatically convert existing code to use Java 8 lambda expressions.
+    Developed a refactoring plugin for the NetBeans IDE to automatically convert existing code to use Java 8 lambda expressions.
     This plugin was accepted as an official patch to the NetBeans source code.
-    We
-    <a href="http://dig.cs.illinois.edu/papers/lambdaRefactoring.pdf" target="_blank">
-    published a paper
+    We published a paper detailing development and applicability of the refactorings.
+  extras: >
+    <div
+      ng-click="showUiucVideo = !showUiucVideo"
+      ng-init="showUiucVideo = false"
+      class="btn btn-primary btn-sm">
+      Video
+      <i class="fa fa-chevron-down"></i>
+    </div>
+    <a
+      href="http://dig.cs.illinois.edu/papers/lambdaRefactoring.pdf"
+      target="_blank"
+      class="btn btn-primary btn-sm">
+      Research Paper
+      <i class="fa fa-external-link"></i>
     </a>
-    detailing development and applicability of the refactorings.
+    <a
+      href="http://cs.illinois.edu"
+      target="_blank"
+      class="btn btn-primary btn-sm">
+      CS @ UIUC
+      <i class="fa fa-external-link"></i>
+    </a>
+    <div ng-if="showUiucVideo">
+      <div ng-include="'/pages/work/uiuc.html'"></div>
+    </div>

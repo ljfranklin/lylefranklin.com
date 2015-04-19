@@ -3,6 +3,7 @@
 @import 'normalize.css/normalize';
 
 @import 'theme_superhero/_variables';
+
 // keep nav items on one line on mobile screens
 $grid-float-breakpoint: 0;
 
@@ -68,6 +69,14 @@ body {
             display: block;
         }
     }
+}
+
+.panel {
+  .panel-footer {
+    .btn {
+      margin-right: 15px;
+    }
+  }
 }
 
 //Transitions adapted from https://github.com/codrops/PageTransitions
