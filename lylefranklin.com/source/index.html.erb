@@ -30,24 +30,40 @@
           <a href="/#/" class="navbar-brand">
             lyle:~$
           </a>
+          <button
+            type="button"
+            class="navbar-toggle"
+            ng-init="navCollapsed = true"
+            ng-click="navCollapsed = !navCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
         </div>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="/#/work">
-              Work
-            </a>
-          </li>
-          <li>
-            <a href="/#/resume">
-              Resume
-            </a>
-          </li>
-          <li>
-            <a href="/#/about">
-              About
-            </a>
-          </li>
-        </ul>
+        <div
+          class="collapse navbar-collapse"
+          ng-class="{'in': !navCollapsed}">
+          <ul
+            class="nav navbar-nav navbar-right"
+            ng-click="navCollapsed = true">
+            <li>
+              <a href="/#/work">
+                Work
+              </a>
+            </li>
+            <li>
+              <a href="/#/resume">
+                Resume
+              </a>
+            </li>
+            <li>
+              <a href="/#/about">
+                About
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="page-container">
