@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# idempotent add to bashrc
-add_to_bashrc() {
-    grep -qF "$1" /home/vagrant/.bashrc || echo $1 >> /home/vagrant/.bashrc
-}
-export -f add_to_bashrc

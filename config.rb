@@ -9,6 +9,8 @@ set :images_dir, 'images'
 # Don't build orig images
 ignore "images/*.orig.*"
 
+activate :livereload
+
 # Import Bower assests
 bower_directory = 'bower_components'
 sprockets.append_path File.join root, bower_directory

@@ -13,16 +13,29 @@ A static middleman app deployed as my personal homepage. My main focus was makin
 
 ### Prerequisites
 
-1. Install Vagrant
+1. Install Docker: https://docs.docker.com/installation/
+2. Pull docker image: `docker pull ljfranklin/middleman`
+
+### Commands
+
+Run middleman server with live reload:
 
 ```
-sudo apt-get install virtualbox
-sudo apt-get install vagrant
-sudo apt-get install virtualbox-dkms
+./scripts/docker ./scripts/run-server
 ```
 
-2. Install NFS on host machine
-
+Compile all files into ./build:
 ```
-sudo apt-get install nfs-kernel-server
+./scripts/docker ./scripts/build
+```
+
+Clean ./build:
+```
+./scripts/docker ./scripts/clean
+```
+
+Rebuild docker image (required if adding new gems):
+```
+docker build -t ljfranklin/middleman .
+docker push ljfranklin/middleman
 ```

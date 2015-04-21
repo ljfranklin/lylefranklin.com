@@ -1,5 +1,0 @@
-#!/bin/bash
-source install-scripts/script-helpers
-
-# remove hostname from prompt to save space
-add_to_bashrc "export PS1=\"\u:\w $ \""
