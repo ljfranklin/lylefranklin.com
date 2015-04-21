@@ -2,7 +2,7 @@
 .vagrant/
 
 # Middleman
-lylefranklin.com/build/
+build/
 
 # Vim
 *.swp
