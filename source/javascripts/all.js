@@ -22,6 +22,15 @@ angular.module('homepageApp', [
       templateUrl: '/pages/home.html'
     });
 }])
+.controller('LoadingCtrl', ['$scope', '$document', function($scope, $document) {
+
+  var finish = function() {
+    $scope.doneLoading = true;
+  };
+  $document.ready(function() {
+    $scope.$apply(finish);
+  });
+}])
 .controller('NavCtrl', ['$scope', '$location', function($scope, $location) {
   $scope.isActivePage = function(pageName) {
     return $location.path() === '/' + pageName;

@@ -1,0 +1,51 @@
+<% require "base64" %>
+<style type="text/css">
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    background-color: #2B3E50;
+}
+
+.loading-container .loading-img-container {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+}
+
+.loading-container .loading-img-container .loading-img {
+            position: relative;
+            left: -50%;
+            top: -50%;
+            height: 128px;
+            width: 128px;
+            -webkit-animation: loading-spin 2s infinite linear;
+            animation: loading-spin 2s infinite linear;
+            <% image_data = Base64.encode64(File.read("source/images/spinner.png")).delete!("\n") %>
+            background-image: url(data:image/png;base64,<%= image_data %>)
+}
+
+@-webkit-keyframes loading-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes loading-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+</style>
