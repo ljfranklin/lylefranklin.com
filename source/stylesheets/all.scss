@@ -55,10 +55,19 @@ body {
 }
 
 .media {
+
+    overflow: auto;
+
+    .media-left, .media-right, .media-body {
+        display: inline;
+    }
+    .media-left {
+        float: left;
+    }
     .thumbnail {
         background-color: #ebebeb;
         margin-right: 15px;
-        margin-bottom: 0;
+        margin-bottom: 15px;
     }
     .media-heading {
         small {
@@ -85,6 +94,7 @@ body {
     left: 0;
     overflow-x: hidden;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     transform: translate(0, 0);
     box-sizing: border-box;
 
