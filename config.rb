@@ -20,6 +20,14 @@ set :layout, false
 page "pages/*", :layout => :page_layout
 page "pages/work/*", :layout => :nested_layout
 
+activate :blog do |blog|
+  blog.layout = :page_layout
+  blog.sources = "{year}-{month}-{day}-{title}.html"
+  blog.prefix = "blog"
+end
+
+activate :directory_indexes
+
 helpers do
   def get_templates(dirname='')
     base_dir = Pathname(File.join(File.dirname(__FILE__), "source"))

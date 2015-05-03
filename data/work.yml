@@ -50,7 +50,7 @@ descriptions:
       <i class="fa fa-external-link"></i>
     </a>
     <div ng-if="showIbmVideo">
-      <div ng-include="'/pages/work/ibm.html'"></div>
+      <div ng-include="'/pages/work/ibm'"></div>
     </div>
 - id: inin
   name: Interactive Intelligence
@@ -104,5 +104,5 @@ descriptions:
       <i class="fa fa-external-link"></i>
     </a>
     <div ng-if="showUiucVideo">
-      <div ng-include="'/pages/work/uiuc.html'"></div>
+      <div ng-include="'/pages/work/uiuc'"></div>
     </div>

@@ -18,6 +18,11 @@ angular.module('homepageApp', [
    .when('/resume', {
       templateUrl: '/pages/resume.html'
     })
+   .when('/blog/:route*', {
+      templateUrl: function(routeParams) {
+        return '/blog/' + routeParams.route;
+      }
+    })
    .when('/', {
       templateUrl: '/pages/home.html'
     });
