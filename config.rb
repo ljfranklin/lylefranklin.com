@@ -24,6 +24,7 @@ activate :blog do |blog|
   blog.layout = :page_layout
   blog.sources = "{year}-{month}-{day}-{title}.html"
   blog.prefix = "blog"
+  summary_length = -1
 end
 
 activate :directory_indexes

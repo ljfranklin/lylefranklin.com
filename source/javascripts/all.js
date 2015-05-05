@@ -18,6 +18,9 @@ angular.module('homepageApp', [
    .when('/resume', {
       templateUrl: '/pages/resume.html'
     })
+   .when('/blog', {
+      templateUrl: '/pages/blog.html'
+   })
    .when('/blog/:route*', {
       templateUrl: function(routeParams) {
         return '/blog/' + routeParams.route;

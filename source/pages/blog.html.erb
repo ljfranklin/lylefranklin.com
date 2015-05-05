@@ -1,0 +1,18 @@
+<% blog.articles.each do |article| %>
+  <article class="panel panel-default">
+    <div class="panel-heading">
+      <a class="panel-title" href="<%= article.url %>">
+        <%= article.title %>
+      </a>
+      <small>
+        <%= article.date.strftime('%b %e %Y') %>
+      </small>
+    </div>
+    <div class="panel-body">
+      <%= article.summary %>
+      <a class="btn btn-primary" href="/#<%= article.url %>" role="button">
+        Read more
+      </a>
+    </div>
+  </article>
+<% end %>
