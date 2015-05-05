@@ -21,9 +21,10 @@ page "pages/*", :layout => :page_layout
 page "pages/work/*", :layout => :nested_layout
 
 activate :blog do |blog|
-  blog.layout = :page_layout
+  blog.layout = :article_layout
   blog.sources = "{year}-{month}-{day}-{title}.html"
   blog.prefix = "blog"
+  blog.paginate = true
   summary_length = -1
 end
 

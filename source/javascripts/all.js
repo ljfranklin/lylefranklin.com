@@ -19,7 +19,12 @@ angular.module('homepageApp', [
       templateUrl: '/pages/resume.html'
     })
    .when('/blog', {
-      templateUrl: '/pages/blog.html'
+      templateUrl: '/pages/blog'
+   })
+   .when('/blog/page/:page_num', {
+      templateUrl: function(routeParams) {
+        return '/pages/blog/page/' + routeParams.page_num;
+      }
    })
    .when('/blog/:route*', {
       templateUrl: function(routeParams) {
