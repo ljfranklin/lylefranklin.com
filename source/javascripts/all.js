@@ -19,7 +19,8 @@ angular.module('homepageApp', [
       templateUrl: '/pages/resume.html'
     })
    .when('/blog', {
-      templateUrl: '/pages/blog'
+      // pagination adds page 1 under subdirectory
+      templateUrl: '/pages/blog/index.html'
    })
    .when('/blog/page/:page_num', {
       templateUrl: function(routeParams) {
