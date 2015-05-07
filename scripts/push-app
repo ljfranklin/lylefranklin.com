@@ -1,9 +1,12 @@
 #!/bin/bash
 set -eux
 
+APP_NAME=${1:-homepage}
+MANIFEST_FILE=${2:-manifest.yml}
+
 SCRIPTS_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 PROJECT_DIR=$(cd $SCRIPTS_DIR/.. && pwd)
 
 pushd $PROJECT_DIR
-  bundle exec middleman build
+  cf zero-downtime-push $APP_NAME -f $MANIFEST_FILE
 popd

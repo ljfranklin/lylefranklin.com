@@ -39,3 +39,10 @@ Rebuild docker image (required if adding new gems):
 docker build -t ljfranklin/middleman .
 docker push ljfranklin/middleman
 ```
+
+Push the app to Cloud Foundry (w/zero downtime plugin):
+```
+go get github.com/concourse/autopilot
+cf install-plugin $GOPATH/bin/autopilot
+./scripts/push-app YOUR_APP_NAME YOUR_MANIFEST_FILE
+```
