@@ -1,3 +1,5 @@
-<script type="text/ng-template" id="<%= @page_url %>">
-  <%= yield %>
+<script type="text/ng-template" id="<%= page_url %>">
+  <% wrap_layout :page_layout do %>
+    <%= yield %>
+  <% end %>
 </script>

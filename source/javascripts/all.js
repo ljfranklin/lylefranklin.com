@@ -10,17 +10,16 @@ angular.module('homepageApp', [
 
   $routeProvider
     .when('/about', {
-      templateUrl: '/pages/about.html'
+      templateUrl: '/pages/about/'
     })
    .when('/work', {
-      templateUrl: '/pages/work.html'
+      templateUrl: '/pages/work/'
     })
    .when('/resume', {
-      templateUrl: '/pages/resume.html'
+      templateUrl: '/pages/resume/'
     })
    .when('/blog', {
-      // pagination adds page 1 under subdirectory
-      templateUrl: '/pages/blog/index.html'
+      templateUrl: '/pages/blog/'
    })
    .when('/blog/page/:page_num', {
       templateUrl: function(routeParams) {
@@ -33,7 +32,7 @@ angular.module('homepageApp', [
       }
     })
    .when('/', {
-      templateUrl: '/pages/home.html'
+      templateUrl: '/pages/home/'
     });
 }])
 .controller('LoadingCtrl', ['$scope', '$document', function($scope, $document) {

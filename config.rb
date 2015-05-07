@@ -15,10 +15,10 @@ activate :livereload
 bower_directory = 'bower_components'
 sprockets.append_path File.join root, bower_directory
 
-# Layouts
+# Top-level pages are embedded as ng_templates, layout is done in index
 set :layout, false
-page "pages/*", :layout => :page_layout
-page "pages/work/*", :layout => :nested_layout
+# Paginated blog post lists are fetched on-demand
+page "pages/blog/**/*", :layout => :page_layout
 
 activate :blog do |blog|
   blog.layout = :article_layout
@@ -31,23 +31,28 @@ end
 activate :directory_indexes
 
 helpers do
-  def get_templates(dirname='')
-    base_dir = Pathname(File.join(File.dirname(__FILE__), "source"))
-    target_dir = Dir[File.join(base_dir, dirname, "*")]
-    target_dir.select { |filename|
-      File.file?(filename)
-    }.map { |filename|
-      template_name = File.basename(filename, '.*')
-      template_path = Pathname(File.join(File.dirname(filename), template_name))
-      Pathname(template_path).relative_path_from(base_dir).to_s
-    }
-  end
+  def get_templates(include_patterns, exclude_patterns=[])
 
-  def partial_with_layout(partial_name, layout_name)
-    wrap_layout layout_name do
-      @page_url = "/" + partial_name
-      partial @page_url
-    end 
+    matching_resources = []
+    sitemap.resources.each { |current_resource|
+      found_match = include_patterns.any? { |pattern|
+        File.fnmatch?(pattern, current_resource.request_path, File::FNM_PATHNAME)
+      }
+      if found_match
+        matching_resources = matching_resources | [current_resource]
+      end
+    }
+
+    matching_resources.each { |resource|
+      found_match = exclude_patterns.any? { |pattern|
+        File.fnmatch?(pattern, resource.request_path, File::FNM_PATHNAME)
+      }
+      if found_match
+        matching_resources = matching_resources - [resource]
+      end
+    }
+
+    matching_resources
   end
 end
 
