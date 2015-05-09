@@ -23,7 +23,7 @@ angular.module('homepageApp', [
    })
    .when('/blog/page/:page_num', {
       templateUrl: function(routeParams) {
-        return '/pages/blog/page/' + routeParams.page_num;
+        return '/pages/blog/page/' + routeParams.page_num + '/';
       }
    })
    .when('/blog/:route*', {

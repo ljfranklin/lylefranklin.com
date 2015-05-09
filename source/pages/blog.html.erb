@@ -9,7 +9,7 @@ per_page: 1
     <% prev_page_number = page_number - 1 %>
     <% prev_page_link = "/#/blog/" %>
     <% if prev_page_number > 1 %>
-      <% prev_page_link << "page/#{prev_page_number}" %>
+      <% prev_page_link << "page/#{prev_page_number}/" %>
     <% end %>
     <a href="<%= prev_page_link %>">
       Previous Page
@@ -19,7 +19,7 @@ per_page: 1
 <% page_articles.each do |article| %>
   <article class="panel panel-default">
     <div class="panel-heading">
-      <a class="panel-title" href="<%= article.url %>">
+      <a class="panel-title" href="/#<%= article.url %>">
         <%= article.title %>
       </a>
       <small>
@@ -36,7 +36,7 @@ per_page: 1
 <% end %>
 <% if paginate %>
   <% if next_page %>
-    <a href="/#/blog/page/<%= page_number + 1 %>">
+    <a href="/#/blog/page/<%= page_number + 1 %>/">
       Next Page
     </a>
   <% end %>
