@@ -2,11 +2,12 @@
 //= require "angular-animate/angular-animate.min.js"
 //= require_tree .
 
-angular.module('homepageApp', [
+var myApp = angular.module('homepageApp', [
   'ngRoute',
   'ngAnimate'
-])
-.config(['$routeProvider', function($routeProvider) {
+]);
+
+myApp.config(['$routeProvider', function($routeProvider) {
 
   $routeProvider
     .when('/about', {
@@ -34,17 +35,19 @@ angular.module('homepageApp', [
    .when('/', {
       templateUrl: '/pages/home/'
     });
-}])
-.controller('LoadingCtrl', ['$scope', '$document', function($scope, $document) {
+}]);
+
+myApp.controller('LoadingCtrl', ['$scope', '$document', function($scope, $document) {
 
   var finish = function() {
-    $scope.doneLoading = true;
+    $scope.$parent.doneLoading = true;
   };
   $document.ready(function() {
     $scope.$apply(finish);
   });
-}])
-.controller('NavCtrl', ['$scope', '$location', function($scope, $location) {
+}]);
+
+myApp.controller('NavCtrl', ['$scope', '$location', function($scope, $location) {
   $scope.isActivePage = function(pageName) {
     return $location.path() === '/' + pageName;
   };
