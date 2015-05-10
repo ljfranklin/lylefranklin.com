@@ -37,18 +37,16 @@ myApp.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-myApp.controller('LoadingCtrl', ['$scope', '$document', function($scope, $document) {
-
-  var finish = function() {
-    $scope.$parent.doneLoading = true;
-  };
-  $document.ready(function() {
-    $scope.$apply(finish);
-  });
-}]);
-
 myApp.controller('NavCtrl', ['$scope', '$location', function($scope, $location) {
   $scope.isActivePage = function(pageName) {
     return $location.path() === '/' + pageName;
   };
+}]);
+
+myApp.run(['$rootScope', '$document', function($rootScope, $document) {
+  $document.ready(function() {
+    $rootScope.$apply(function() {
+      $rootScope.doneLoading = true;
+    });
+  });
 }]);
