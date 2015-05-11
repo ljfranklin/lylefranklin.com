@@ -37,16 +37,32 @@ myApp.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-myApp.controller('NavCtrl', ['$scope', '$location', function($scope, $location) {
-  $scope.isActivePage = function(pageName) {
-    return $location.path() === '/' + pageName;
-  };
-}]);
-
-myApp.run(['$rootScope', '$document', function($rootScope, $document) {
+myApp.run(['$rootScope', '$document', '$location', '$timeout', function($rootScope, $document, $location, $timeout) {
   $document.ready(function() {
     $rootScope.$apply(function() {
       $rootScope.doneLoading = true;
     });
+  });
+
+  //used to animate elements via ng-if once the page has changed
+  $rootScope.isCurrentPage = {};
+  $rootScope.$on("$locationChangeSuccess", function() {
+      $rootScope.isCurrentPage = {};
+      $rootScope.$watch('doneLoading', function(newValue, oldValue) {
+        doneLoading = newValue;
+        if (doneLoading) {
+          firstLoad = (oldValue !== true);
+          if (firstLoad) {
+            animateDelay = 0;
+          } else {
+            //trigger element animation after page animation is half over
+            pageTransitionDuration = 600;
+            animateDelay = pageTransitionDuration / 2;
+          }
+          $timeout(function() {
+            $rootScope.isCurrentPage[$location.path()] = true;
+          }, animateDelay);
+        }
+      });
   });
 }]);

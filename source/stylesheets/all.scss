@@ -85,7 +85,7 @@ body {
   }
 }
 
-.fade-in-children > * {
+.fade-children > * {
   &.ng-enter {
     transition: 0.5s linear all;
     opacity:0;

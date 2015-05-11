@@ -22,9 +22,7 @@
       </div>
     </div>
 
-    <div
-      class="navbar navbar-inverse navbar-fixed-top"
-      ng-controller="NavCtrl">
+    <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <a href="/#/" class="navbar-brand">
@@ -47,22 +45,22 @@
           <ul
             class="nav navbar-nav navbar-right"
             ng-click="navCollapsed = true">
-            <li ng-class="{'active': isActivePage('work')}">
+            <li ng-class="{'active': isCurrentPage['/work']}">
               <a href="/#/work">
                 Work
               </a>
             </li>
-            <li ng-class="{'active': isActivePage('blog')}">
+            <li ng-class="{'active': isCurrentPage['/blog']}">
               <a href="/#/blog">
                 Blog
               </a>
             </li>
-            <li ng-class="{'active': isActivePage('resume')}">
+            <li ng-class="{'active': isCurrentPage['/resume']}">
               <a href="/#/resume">
                 Resume
               </a>
             </li>
-            <li ng-class="{'active': isActivePage('about')}">
+            <li ng-class="{'active': isCurrentPage['/about']}">
               <a href="/#/about">
                 About
               </a>

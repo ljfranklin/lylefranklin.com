@@ -2,33 +2,33 @@
   Full-stack developer interested in distributed systems and automation
 </p>
 <hr/>
-<div class="fade-in-children">
+<div class="fade-children" ng-animate-children>
   <a href="/#/work"
-    ng-if="doneLoading"
+    ng-if="isCurrentPage['/']"
     class="btn btn-primary btn-lg btn-block">
     <i class="fa fa-briefcase"></i>
     See some <strong>work</strong> I've done
   </a>
   <a href="/#/blog"
-    ng-if="doneLoading"
+    ng-if="isCurrentPage['/']"
     class="btn btn-primary btn-lg btn-block">
     <i class="fa fa-pencil"></i>
     Read a <strong>blog</strong> post
   </a>
   <a href="/#/resume"
-    ng-if="doneLoading"
+    ng-if="isCurrentPage['/']"
     class="btn btn-primary btn-lg btn-block">
     <i class="fa fa-file-text"></i>
     Scan my <strong>resume</strong>
   </a>
   <a href="/#/about"
-    ng-if="doneLoading"
+    ng-if="isCurrentPage['/']"
     class="btn btn-primary btn-lg btn-block">
     <i class="fa fa-user"></i>
     Learn more <strong>about</strong> me
   </a>
   <a href="https://github.com/ljfranklin"
-    ng-if="doneLoading"
+    ng-if="isCurrentPage['/']"
     target="_blank"
     class="btn btn-primary btn-lg btn-block">
     <i class="fa fa-github"></i>
