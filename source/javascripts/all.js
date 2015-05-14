@@ -37,32 +37,25 @@ myApp.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-myApp.run(['$rootScope', '$document', '$location', '$timeout', function($rootScope, $document, $location, $timeout) {
-  $document.ready(function() {
-    $rootScope.$apply(function() {
-      $rootScope.doneLoading = true;
-    });
-  });
+myApp.run(['$rootScope', '$location', '$timeout', function($rootScope, $location, $timeout) {
 
-  //used to animate elements via ng-if once the page has changed
-  $rootScope.isCurrentPage = {};
-  $rootScope.$on("$locationChangeSuccess", function() {
-      $rootScope.isCurrentPage = {};
-      $rootScope.$watch('doneLoading', function(newValue, oldValue) {
-        doneLoading = newValue;
-        if (doneLoading) {
-          firstLoad = (oldValue !== true);
-          if (firstLoad) {
+    $rootScope.doneLoading = true;
+
+    //used to animate elements via ng-if once the page has changed
+    $rootScope.isCurrentPage = {};
+    var firstLoad = true;
+    $rootScope.$on("$locationChangeSuccess", function() {
+        $rootScope.isCurrentPage = {};
+        if (firstLoad) {
             animateDelay = 0;
-          } else {
+            firstLoad = false;
+        } else {
             //trigger element animation after page animation is half over
             pageTransitionDuration = 600;
             animateDelay = pageTransitionDuration / 2;
-          }
-          $timeout(function() {
-            $rootScope.isCurrentPage[$location.path()] = true;
-          }, animateDelay);
         }
-      });
-  });
+        $timeout(function() {
+            $rootScope.isCurrentPage[$location.path()] = true;
+        }, animateDelay);
+    });
 }]);

@@ -1,33 +1,35 @@
-<h1>
-  WORK
-</h1>
-<div class="fade-children" ng-animate-children>
-  <% data.work.descriptions.each do |w| %>
-    <div
-      ng-if="isCurrentPage['/work']"
-      class="enter media panel panel-default">
-      <div class="panel-body">
-        <div class="media-left">
-          <img class="media-object thumbnail loading-image" src="/images/<%= w.image %>" width="128" height="128">
+<div class="work-page">
+  <h1>
+    WORK
+  </h1>
+  <div class="fade-children" ng-animate-children>
+    <% data.work.descriptions.each do |w| %>
+      <div
+        ng-if="isCurrentPage['/work']"
+        class="enter media panel panel-default">
+        <div class="panel-body">
+          <div class="media-left">
+            <img class="media-object thumbnail loading-image" src="/images/<%= w.image %>" width="128" height="128">
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">
+              <%= w.name %>
+              <small>
+                <%= w.position %>
+              </small>
+              <small>
+                <%= "#{w.start_date} - #{w.end_date} | #{w.location}" %>
+              </small>
+            </h4>
+            <%= w.text %>
+          </div>
         </div>
-        <div class="media-body">
-          <h4 class="media-heading">
-            <%= w.name %>
-            <small>
-              <%= w.position %>
-            </small>
-            <small>
-              <%= "#{w.start_date} - #{w.end_date} | #{w.location}" %>
-            </small>
-          </h4>
-          <%= w.text %>
-        </div>
+        <% if (w.extras) then %>
+          <div class="extras panel-footer">
+            <%= w.extras %>
+          </div>
+        <% end %>
       </div>
-      <% if (w.extras) then %>
-        <div class="extras panel-footer">
-          <%= w.extras %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>

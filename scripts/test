@@ -1,0 +1,9 @@
+#!/bin/bash
+set -eux
+
+SCRIPTS_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+PROJECT_DIR=$(cd $SCRIPTS_DIR/.. && pwd)
+
+pushd $PROJECT_DIR
+  bundle exec rspec
+popd

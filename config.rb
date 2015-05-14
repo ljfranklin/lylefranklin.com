@@ -1,3 +1,4 @@
+require 'rake/file_list'
 require 'pathname'
 
 # Setup directory structure
@@ -9,11 +10,29 @@ set :images_dir, 'images'
 # Don't build orig images
 ignore "images/*.orig.*"
 
-activate :livereload
+after_configuration do
+  # Import Bower assests
+  bower_directory = 'bower_components'
+  sprockets.append_path File.join root, bower_directory
 
-# Import Bower assests
-bower_directory = 'bower_components'
-sprockets.append_path File.join root, bower_directory
+  # Build search patterns
+  patterns = [
+    '.png',  '.gif', '.jpg', '.jpeg', '.svg', # Images
+    '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
+    '.js',                                    # Javascript
+  ].map { |e| File.join(bower_directory, "**", "*#{e}" ) }
+
+  # Create file list and exclude unwanted files
+  Rake::FileList.new(*patterns) do |l|
+    l.exclude(/src/)
+    l.exclude(/test/)
+    l.exclude(/demo/)
+    l.exclude { |f| !File.file? f }
+  end.each do |f|
+    # Import relative paths
+    sprockets.import_asset(Pathname.new(f).relative_path_from(Pathname.new(bower_directory)))
+  end
+end
 
 # Top-level pages are embedded as ng_templates, layout is done in index
 set :layout, false
@@ -57,6 +76,7 @@ helpers do
 end
 
 configure :development do
+  activate :livereload
   set :debug_assets, true
 end
 
