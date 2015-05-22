@@ -16,9 +16,6 @@ RUN cp phantomjs/bin/phantomjs /usr/local/bin/
 # Install Ruby tools
 RUN gem install middleman rspec
 
-# Expose Middleman port
-EXPOSE 4567
-
 # Cache Bundled gems
 COPY Gemfile /tmp/
 COPY Gemfile.lock /tmp/

@@ -1,3 +1,11 @@
 #!/bin/bash
 
-docker run -i -t -p 4567:4567 -v $PWD:/workdir ljfranklin/middleman $@
+set -ex
+
+DOCKER_OPTS=${DOCKER_OPTS:-}
+MIDDLEMAN_PORT=4567
+if [ ! -z "$PORT" ]; then
+  DOCKER_OPTS="$DOCKER_OPTS -p $PORT:$MIDDLEMAN_PORT"
+fi
+
+docker run -i -t -v $PWD:/workdir $DOCKER_OPTS ljfranklin/middleman "$@"

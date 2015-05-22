@@ -21,7 +21,7 @@ A static middleman app deployed as my personal homepage. My main focus was makin
 Run middleman server with live reload:
 
 ```
-./scripts/docker ./scripts/run-server
+PORT=4567 ./scripts/docker ./scripts/run-server
 ```
 
 Compile all files into ./build:
