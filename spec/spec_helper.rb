@@ -39,3 +39,11 @@ Capybara.app = Middleman::Application.server.inst do
   set :environment, :test
   set :show_exceptions, false
 end
+
+def get_page_names
+  files = Dir[File.join(File.dirname(__FILE__), '..', "source/pages/*.html*")]
+  files.map do |filepath|
+    filename = File.basename(filepath)
+    filename.split(".").first
+  end
+end

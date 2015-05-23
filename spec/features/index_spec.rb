@@ -7,10 +7,12 @@ RSpec.describe "home", :js => true, :type => :feature do
     visit "/"
   end
   
-  it "contains links to other pages" do
+  it "contains links to top-level pages" do
+    page_names = get_page_names - ["home"]
+
     expect(page).to have_selector ".home-page"
-    within ".home-page" do
-      expect(page).to have_selector "a[href='/#/work']"
+    page_names.each do |page_name|
+      expect(page).to have_selector ".home-page a[href='/#/#{page_name}']"
     end
   end
 end
