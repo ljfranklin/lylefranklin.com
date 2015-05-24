@@ -38,7 +38,7 @@ Capybara.app = Middleman::Application.server.inst do
   set :debug_assets, true
   set :root, File.expand_path(File.join(File.dirname(__FILE__), '..'))
   set :environment, :test
-  set :show_exceptions, false
+  set :show_exceptions, true
 end
 
 # Get name of page from filename before .html.erb
