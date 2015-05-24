@@ -1,9 +1,14 @@
 #!/bin/bash
 set -eux
 
+if [ -z "$PORT" ]; then
+  echo '$PORT is not set. Exiting...'
+  exit 1
+fi
+
 SCRIPTS_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 PROJECT_DIR=$(cd $SCRIPTS_DIR/.. && pwd)
 
 pushd $PROJECT_DIR
-  bundle exec middleman server
+  bundle exec middleman server --port $PORT
 popd

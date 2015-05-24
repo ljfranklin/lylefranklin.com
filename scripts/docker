@@ -3,9 +3,15 @@
 set -ex
 
 DOCKER_OPTS=${DOCKER_OPTS:-}
-MIDDLEMAN_PORT=4567
 if [ ! -z "$PORT" ]; then
-  DOCKER_OPTS="$DOCKER_OPTS -p $PORT:$MIDDLEMAN_PORT"
+  DOCKER_OPTS="$DOCKER_OPTS -p $PORT:$PORT"
 fi
 
-docker run -i -t -v $PWD:/workdir $DOCKER_OPTS ljfranklin/middleman "$@"
+docker run \
+  -i \
+  -t \
+  -v $PWD:/workdir \
+  -e PORT=$PORT \
+  $DOCKER_OPTS \
+  ljfranklin/middleman \
+  "$@"
