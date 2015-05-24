@@ -33,6 +33,7 @@ RSpec.configure do |config|
 end
 
 Capybara.javascript_driver = :poltergeist
+Capybara.ignore_hidden_elements = false
 Capybara.app = Middleman::Application.server.inst do
   set :debug_assets, true
   set :root, File.expand_path(File.join(File.dirname(__FILE__), '..'))

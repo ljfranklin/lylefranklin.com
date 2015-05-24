@@ -15,4 +15,13 @@ RSpec.describe "home", :js => true, :type => :feature do
       expect(page).to have_selector ".home-page a[href='/#/#{page_name}']"
     end
   end
+
+  it "contains templates for top-level pages" do
+    get_page_names.each do |page_name|
+      expect(page).to have_selector(
+        :xpath,
+        "//script[@id='/pages/#{page_name}/'][@type='text/ng-template']"
+      )
+    end
+  end
 end
