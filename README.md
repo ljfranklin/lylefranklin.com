@@ -1,5 +1,7 @@
 ## lylefranklin.com
 
+<a href="https://travis-ci.org/ljfranklin/middleman-homepage"><img src="https://travis-ci.org/ljfranklin/middleman-homepage.svg" alt="Build Status"></a>
+
 A static middleman app deployed as my personal homepage. My main focus was making the site load as fast as possible. To that end, the app includes the following filesize optimizations:
 
 - The two largest components, angular and bootstrap, are fetched from a CDN.
