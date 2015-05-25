@@ -32,11 +32,15 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 end
 
+def root_dir
+  File.expand_path(File.join(File.dirname(__FILE__), '..'))
+end
+
 Capybara.javascript_driver = :poltergeist
 Capybara.ignore_hidden_elements = false
 Capybara.app = Middleman::Application.server.inst do
   set :debug_assets, true
-  set :root, File.expand_path(File.join(File.dirname(__FILE__), '..'))
+  set :root, root_dir
   set :environment, :test
   set :show_exceptions, true
 end
@@ -44,12 +48,19 @@ end
 # Get name of page from filename before .html.erb
 def get_page_names
   files = Dir[File.join(
-    File.dirname(__FILE__),
-    '..',
+    root_dir,
     "source/pages/*.html*"
   )]
   files.map do |filepath|
     filename = File.basename(filepath)
     filename.split(".").first
   end
+end
+
+def get_data_file(filename)
+  File.join(
+    root_dir,
+    "data",
+    filename
+  )
 end
