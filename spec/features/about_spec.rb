@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe "loading", :js => true, :type => :feature do
+RSpec.describe "about", :js => true, :type => :feature do
   before do
     visit "/#/about"
   end
