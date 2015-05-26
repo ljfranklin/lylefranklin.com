@@ -26,7 +26,35 @@
         </div>
         <% if (w.extras) then %>
           <div class="extras panel-footer">
-            <%= w.extras %>
+            <% w.extras.each_with_index do |extra, index| %>
+              <% case extra.type %>
+              <% when "link" %>
+                <a
+                  href="<%= extra.href %>"
+                  target="_blank"
+                  class="btn btn-primary btn-sm">
+                  <%= extra.label %>
+                  <i class="fa fa-external-link"></i>
+                </a>
+              <% when "embed" %>
+                <% embedToggleVar = "embedToggle#{index}" %>
+                <button
+                  ng-init="<%= embedToggleVar %> = false"
+                  ng-click="<%= embedToggleVar %> = !<%= embedToggleVar %>"
+                  class="btn btn-primary btn-sm">
+                  <%= extra.label %>
+                  <i class="fa fa-chevron-down"></i>
+                </button>
+              <% end %>
+            <% end %>
+
+            <% w.extras.each_with_index do |extra, index| %>
+              <% next unless extra.type == "embed" %>
+              <% embedToggleVar = "embedToggle#{index}" %>
+              <div ng-if="<%= embedToggleVar %>">
+                <div ng-include="'<%= extra.content_file %>'"></div>
+              </div>
+            <% end %>
           </div>
         <% end %>
       </div>

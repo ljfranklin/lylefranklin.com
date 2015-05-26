@@ -9,21 +9,13 @@ descriptions:
   text: >
     I work on Cloud Foundry, an open source Platform as a Service.
     My current team builds an automated MySQL cluster with custom high-availability components.
-  extras: >
-    <a
-      href="http://pivotal.io/platform-as-a-service/pivotal-cloud-foundry"
-      target="_blank"
-      class="btn btn-primary btn-sm">
-      Cloud Foundry
-      <i class="fa fa-external-link"></i>
-    </a>
-    <a
-      href="https://github.com/cloudfoundry/cf-mysql-release"
-      target="_blank"
-      class="btn btn-primary btn-sm">
-      MySQL Cluster
-      <i class="fa fa-external-link"></i>
-    </a>
+  extras:
+  - type: link
+    label: Cloud Foundry
+    href: http://pivotal.io/platform-as-a-service/pivotal-cloud-foundry
+  - type: link
+    label: MySQL Cluster
+    href: https://github.com/cloudfoundry/cf-mysql-release
 - id: ibm
   name: IBM
   image: ibm.png
@@ -34,24 +26,13 @@ descriptions:
   text: >
     Worked with two other tech interns and an MBA under IBM's Emerging Technology group.
     Together we built a system to allow non-technical users to deploy solutions to IBM's Bluemix cloud hosting service.
-  extras: >
-    <div
-      ng-click="showIbmVideo = !showIbmVideo"
-      ng-init="showIbmVideo = false"
-      class="btn btn-primary btn-sm">
-      Video
-      <i class="fa fa-chevron-down"></i>
-    </div>
-    <a
-      href="http://www-01.ibm.com/employment/us/extremeblue/"
-      target="_blank"
-      class="btn btn-primary btn-sm">
-      Extreme Blue
-      <i class="fa fa-external-link"></i>
-    </a>
-    <div ng-if="showIbmVideo">
-      <div ng-include="'/pages/work/ibm'"></div>
-    </div>
+  extras:
+  - type: embed
+    label: Video
+    content_file: /pages/work/ibm
+  - type: link
+    label: Extreme Blue
+    href: http://www-01.ibm.com/employment/us/extremeblue/
 - id: inin
   name: Interactive Intelligence
   image: inin.jpg
@@ -62,14 +43,10 @@ descriptions:
   text: >
     Designed and implemented internal business tools used by hundreds of employees.
     Collaborated with engineers, sales, and management to streamline interactions between teams through custom process automation tools.
-  extras: >
-    <a
-      href="http://www.inin.com"
-      target="_blank"
-      class="btn btn-primary btn-sm">
-      ININ
-      <i class="fa fa-external-link"></i>
-    </a>
+  extras:
+  - type: link
+    label: ININ
+    href: http://www.inin.com
 - id: uiuc
   name: University of Illinois @ Urbana-Champaign
   image: uiuc.png
@@ -81,28 +58,13 @@ descriptions:
     Developed a refactoring plugin for the NetBeans IDE to automatically convert existing code to use Java 8 lambda expressions.
     This plugin was accepted as an official patch to the NetBeans source code.
     We published a paper detailing development and applicability of the refactorings.
-  extras: >
-    <div
-      ng-click="showUiucVideo = !showUiucVideo"
-      ng-init="showUiucVideo = false"
-      class="btn btn-primary btn-sm">
-      Video
-      <i class="fa fa-chevron-down"></i>
-    </div>
-    <a
-      href="http://dig.cs.illinois.edu/papers/lambdaRefactoring.pdf"
-      target="_blank"
-      class="btn btn-primary btn-sm">
-      Paper
-      <i class="fa fa-external-link"></i>
-    </a>
-    <a
-      href="http://cs.illinois.edu"
-      target="_blank"
-      class="btn btn-primary btn-sm">
-      CS @ UIUC
-      <i class="fa fa-external-link"></i>
-    </a>
-    <div ng-if="showUiucVideo">
-      <div ng-include="'/pages/work/uiuc'"></div>
-    </div>
+  extras:
+  - type: embed
+    label: Video
+    content_file: /pages/work/uiuc
+  - type: link
+    label: Paper
+    href: http://dig.cs.illinois.edu/papers/lambdaRefactoring.pdf
+  - type: link
+    label: CS @ UIUC
+    href: http://cs.illinois.edu

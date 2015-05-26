@@ -15,6 +15,12 @@ RSpec.describe "work", :js => true, :type => :feature do
     expect(page).to have_selector ".page-container .work-page" 
   end
 
+  it "displays one container for each work description" do
+    jobs = page.all ".work-container"
+    data_job_count = work_data["descriptions"].length
+    expect(jobs.count).to be(data_job_count)
+  end
+
   it "displays job properties from data/work.yml" do
    text_properties = [
       "name",
@@ -27,14 +33,8 @@ RSpec.describe "work", :js => true, :type => :feature do
     image_properties = [
       "image"
     ]
-    html_properties = [
-      "extras"
-    ]
 
-    jobs = page.all ".work-container"
-    data_job_count = work_data["descriptions"].length
-    expect(jobs.count).to be(data_job_count)
-
+    jobs = page.all(".work-container")
     work_data["descriptions"].each_with_index do |data_job, index|
       page_job = jobs[index]
 
@@ -49,11 +49,32 @@ RSpec.describe "work", :js => true, :type => :feature do
           "img[src='/images/#{data_job[prop]}']"
         )
       end
+    end
+  end
 
-      html_properties.each do |prop|
-        expect(data_job).to have_key(prop)
-        # could not find method to get html of page_job
-        expect(page.body).to include(data_job[prop])
+  it "displays extra properties from data/work.yml" do
+    jobs = page.all(".work-container")
+    work_data["descriptions"].each_with_index do |data_job, index|
+      next unless data_job["extras"]
+
+      page_job = jobs[index]
+
+      within page_job do
+        data_job["extras"].each do |extra|
+          case extra["type"]
+          when "link"
+            expect(page_job).to have_link(extra["label"], extra["href"])
+          when "embed"
+            content_link = extra["content_file"]
+            selector = ".extras [ng-include=\"'#{content_link}'\"]"
+
+            expect(page_job).to have_no_selector(selector)
+            click_on extra["label"]
+            expect(page_job).to have_selector(selector)
+            click_on extra["label"]
+            expect(page_job).to have_no_selector(selector)
+          end
+        end
       end
     end
   end
