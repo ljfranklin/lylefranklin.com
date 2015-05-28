@@ -2,6 +2,7 @@ require "middleman"
 require "capybara/rspec"
 require 'capybara/poltergeist'
 require 'capybara/angular'
+require_relative '../dir_manager'
 
 # Need to reload Middleman plugins
 require 'middleman-blog'
@@ -43,6 +44,11 @@ Capybara.app = Middleman::Application.server.inst do
   set :root, root_dir
   set :environment, :test
   set :show_exceptions, true
+
+  before_configuration do
+    activate :dir_manager
+    config[:blog_per_page] = 2
+  end
 end
 
 # Get name of page from filename before .html.erb

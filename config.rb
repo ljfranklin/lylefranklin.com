@@ -44,6 +44,7 @@ activate :blog do |blog|
   blog.sources = "{year}-{month}-{day}-{title}.html"
   blog.prefix = "blog"
   blog.paginate = true
+  blog.per_page = config[:blog_per_page] || 10
   summary_length = -1
 end
 

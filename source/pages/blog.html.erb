@@ -1,43 +1,44 @@
 ---
 pageable: true
-per_page: 1
 ---
-<% if paginate && num_pages > 1 %>
-  <p>Page <%= page_number %> of <%= num_pages %></p>
+<div class="blog-page">
+  <% if paginate && num_pages > 1 %>
+    <p>Page <%= page_number %> of <%= num_pages %></p>
 
-  <% if prev_page %>
-    <% prev_page_number = page_number - 1 %>
-    <% prev_page_link = "/#/blog/" %>
-    <% if prev_page_number > 1 %>
-      <% prev_page_link << "page/#{prev_page_number}/" %>
+    <% if prev_page %>
+      <% prev_page_number = page_number - 1 %>
+      <% prev_page_link = "/#/blog/" %>
+      <% if prev_page_number > 1 %>
+        <% prev_page_link << "page/#{prev_page_number}/" %>
+      <% end %>
+      <a href="<%= prev_page_link %>">
+        Previous Page
+      </a>
     <% end %>
-    <a href="<%= prev_page_link %>">
-      Previous Page
-    </a>
   <% end %>
-<% end %>
-<% page_articles.each do |article| %>
-  <article class="panel panel-default">
-    <div class="panel-heading">
-      <a class="panel-title" href="/#<%= article.url %>">
-        <%= article.title %>
-      </a>
-      <small>
-        <%= article.date.strftime('%b %e %Y') %>
-      </small>
-    </div>
-    <div class="panel-body">
-      <%= article.summary %>
-      <a class="btn btn-primary" href="/#<%= article.url %>" role="button">
-        Read more
-      </a>
-    </div>
-  </article>
-<% end %>
-<% if paginate %>
-  <% if next_page %>
-    <a href="/#/blog/page/<%= page_number + 1 %>/">
-      Next Page
-    </a>
+  <% page_articles.each do |article| %>
+    <article class="blog-post panel panel-default">
+      <div class="panel-heading">
+        <a class="panel-title" href="/#<%= article.url %>">
+          <%= article.title %>
+        </a>
+        <small>
+          <%= article.date.strftime('%b %e %Y') %>
+        </small>
+      </div>
+      <div class="panel-body">
+        <%= article.summary %>
+        <a class="btn btn-primary" href="/#<%= article.url %>" role="button">
+          Read more
+        </a>
+      </div>
+    </article>
   <% end %>
-<% end %>
+  <% if paginate %>
+    <% if next_page %>
+      <a href="/#/blog/page/<%= page_number + 1 %>/">
+        Next Page
+      </a>
+    <% end %>
+  <% end %>
+</div>
