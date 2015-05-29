@@ -1,8 +1,0 @@
----
-title: Test 2
----
-This is the summary
-
-READMORE
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lacinia sapien ut pellentesque porttitor. Sed consequat, dolor non elementum semper, felis quam tempor mi, sit amet blandit metus velit ut nulla. Donec eu tempor nibh. Cras at pulvinar sem. In gravida gravida erat. Morbi quis maximus magna. Curabitur volutpat ex eget ex tincidunt maximus. Sed sed turpis tincidunt, placerat felis congue, interdum orci. Phasellus elementum ex id massa tempus, non rutrum arcu egestas.
