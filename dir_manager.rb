@@ -1,3 +1,4 @@
+# Adapted from https://gist.github.com/Arcovion/2586eb92389967715da4
 class Middleman::Extensions::DirManager < Middleman::Extension
   register :dir_manager
   option :remap_resources, [
