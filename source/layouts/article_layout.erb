@@ -1,18 +1,20 @@
 <% wrap_layout :page_layout do %>
-  <ol class="breadcrumb">
-    <li><a href="/#/blog">< Back</a></li>
-  </ol>
-  <article class="panel panel-default">
-    <div class="panel-heading">
-      <div class="panel-title">
-        <%= current_article.title %>
+  <div class="blog-post-page">
+    <ol class="breadcrumb">
+      <li><a href="/#/blog">< Back</a></li>
+    </ol>
+    <article class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <%= current_article.title %>
+        </div>
+        <small>
+          <%= current_article.date.strftime('%b %e %Y') %>
+        </small>
       </div>
-      <small>
-        <%= current_article.date.strftime('%b %e %Y') %>
-      </small>
-    </div>
-    <div class="panel-body">
-      <%= yield %>
-    </div>
-  </article>
+      <div class="panel-body">
+        <%= yield %>
+      </div>
+    </article>
+  </div>
 <% end %>
