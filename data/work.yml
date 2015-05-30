@@ -29,7 +29,7 @@ descriptions:
   extras:
   - type: embed
     label: Video
-    content_file: /pages/work/ibm
+    content_file: /pages/work/ibm/
   - type: link
     label: Extreme Blue
     href: http://www-01.ibm.com/employment/us/extremeblue/
@@ -61,7 +61,7 @@ descriptions:
   extras:
   - type: embed
     label: Video
-    content_file: /pages/work/uiuc
+    content_file: /pages/work/uiuc/
   - type: link
     label: Paper
     href: http://dig.cs.illinois.edu/papers/lambdaRefactoring.pdf

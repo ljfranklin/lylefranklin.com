@@ -14,7 +14,7 @@ RSpec.describe "blog", :js => true, :type => :feature do
       expect(page).to have_selector ".page-container .blog-page"
     end
 
-    it "displays first page of blog posts in reverse chron. order" do
+    it "displays first page of blog posts in reverse chron. order", :local_only => true do
       posts_selector = ".blog-page .blog-post"
       expect(page).to have_selector posts_selector, count: posts_per_page
 
@@ -31,7 +31,7 @@ RSpec.describe "blog", :js => true, :type => :feature do
       end
     end
 
-    it "paginates the blog posts" do
+    it "paginates the blog posts", :local_only => true do
       work_page = page.find ".blog-page"
 
       expect(work_page).to have_content "Page 1 of 2"
@@ -47,7 +47,7 @@ RSpec.describe "blog", :js => true, :type => :feature do
     end
   end
 
-  describe "blog post" do
+  describe "blog post", :local_only => true do
     before do
       visit "/#/blog/2015/05/01/testing"
     end

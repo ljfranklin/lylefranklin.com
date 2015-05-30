@@ -31,23 +31,35 @@ RSpec.configure do |config|
   config.order = :random
 
   Kernel.srand config.seed
+
+  if ENV["APP_URL"]
+    config.filter_run_excluding :local_only => true
+  end
 end
 
 def root_dir
   File.expand_path(File.join(File.dirname(__FILE__), '..'))
 end
 
-Capybara.javascript_driver = :poltergeist
 Capybara.ignore_hidden_elements = false
-Capybara.app = Middleman::Application.server.inst do
-  set :debug_assets, true
-  set :root, root_dir
-  set :environment, :test
-  set :show_exceptions, true
 
-  before_configuration do
-    activate :dir_manager
-    config[:blog_per_page] = 2
+if ENV["APP_URL"]
+  Capybara.run_server = false
+  Capybara.app_host = ENV["APP_URL"]
+  Capybara.javascript_driver = :selenium
+  Capybara.default_driver = :selenium
+else
+  Capybara.javascript_driver = :poltergeist
+  Capybara.app = Middleman::Application.server.inst do
+    set :debug_assets, true
+    set :root, root_dir
+    set :environment, :test
+    set :show_exceptions, true
+
+    before_configuration do
+      activate :dir_manager
+      config[:blog_per_page] = 2
+    end
   end
 end
 

@@ -45,8 +45,10 @@ RSpec.describe "work", :js => true, :type => :feature do
 
       image_properties.each do |prop|
         expect(data_job).to have_key(prop)
+        # only match on first part of filename to allow for fingerprints
+        img_file = File.basename(data_job[prop], ".*")
         expect(page_job).to have_selector(
-          "img[src='/images/#{data_job[prop]}']"
+          "img[src^='/images/#{img_file}']"
         )
       end
     end
@@ -66,6 +68,7 @@ RSpec.describe "work", :js => true, :type => :feature do
             expect(page_job).to have_link(extra["label"], extra["href"])
           when "embed"
             content_link = extra["content_file"]
+            expect(content_link).to match /\/$|\.html$/
             selector = ".extras [ng-include=\"'#{content_link}'\"]"
 
             expect(page_job).to have_no_selector(selector)

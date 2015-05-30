@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe "loading", :type => :feature do
+RSpec.describe "loading", :type => :feature, :local_only => true do
   before do
     visit "/"
   end
