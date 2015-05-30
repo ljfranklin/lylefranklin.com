@@ -1,13 +1,10 @@
 @charset "utf-8";
 
-@import 'normalize.css/normalize';
+@import 'theme_superhero/_variables.scss';
 
-@import 'theme_superhero/_variables';
+@import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 
-@import "bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
-@import "bootstrap-sass/assets/stylesheets/bootstrap";
-
-@import 'theme_superhero/_bootswatch';
+@import 'theme_superhero/_bootswatch.scss';
 
 html {
   height: 100%;

@@ -15,12 +15,7 @@ after_configuration do
   bower_directory = 'bower_components'
   sprockets.append_path File.join root, bower_directory
 
-  # Build search patterns
-  patterns = [
-    '.png',  '.gif', '.jpg', '.jpeg', '.svg', # Images
-    '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
-    '.js',                                    # Javascript
-  ].map { |e| File.join(bower_directory, "**", "*#{e}" ) }
+  patterns = File.join(bower_directory, "**/*.js")
 
   # Create file list and exclude unwanted files
   Rake::FileList.new(*patterns) do |l|

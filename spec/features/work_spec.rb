@@ -2,6 +2,8 @@ require "spec_helper"
 require 'yaml'
 
 RSpec.describe "work", :js => true, :type => :feature do
+  include Capybara::Angular::DSL
+
   before do
     visit "/#/work"
   end

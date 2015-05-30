@@ -1,15 +1,11 @@
 require "spec_helper"
 
-RSpec.describe "loading", :type => :feature, :local_only => true do
+RSpec.describe "loading", :type => :feature, :js => true do
   before do
     visit "/"
   end
-  
-  it "displays loading icon before JS loads", :js => false do
-    expect(page).to have_selector(".loading-container", visible: true) 
-  end
 
-  it "hides loading icon after JS loads", :js => true do
+  it "hides loading icon after JS loads" do
     expect(page).to have_selector(".loading-container.ng-hide", visible: false) 
   end
 end

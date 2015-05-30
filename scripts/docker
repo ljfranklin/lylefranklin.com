@@ -12,6 +12,7 @@ docker run \
   -t \
   -v $PWD:/workdir \
   -e PORT=$PORT \
+  -e APP_HOST=$APP_HOST \
   $DOCKER_OPTS \
   ljfranklin/middleman \
   "$@"

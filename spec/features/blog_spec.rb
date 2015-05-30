@@ -1,6 +1,7 @@
 require "spec_helper"
 
 RSpec.describe "blog", :js => true, :type => :feature do
+  include Capybara::Angular::DSL
 
   describe "blog list" do
     before do

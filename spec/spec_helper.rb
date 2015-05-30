@@ -42,14 +42,17 @@ def root_dir
 end
 
 Capybara.ignore_hidden_elements = false
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, {
+    :js_errors => true
+  })
+end
+Capybara.javascript_driver = :poltergeist
 
 if ENV["APP_URL"]
   Capybara.run_server = false
   Capybara.app_host = ENV["APP_URL"]
-  Capybara.javascript_driver = :selenium
-  Capybara.default_driver = :selenium
 else
-  Capybara.javascript_driver = :poltergeist
   Capybara.app = Middleman::Application.server.inst do
     set :debug_assets, true
     set :root, root_dir
