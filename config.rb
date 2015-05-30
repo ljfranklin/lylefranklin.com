@@ -10,6 +10,9 @@ set :images_dir, 'images'
 # Don't build orig images
 ignore "images/*.orig.*"
 
+# Don't include vendored styles
+ignore "stylesheets/vendor/*"
+
 after_configuration do
   # Import Bower assests
   bower_directory = 'bower_components'
