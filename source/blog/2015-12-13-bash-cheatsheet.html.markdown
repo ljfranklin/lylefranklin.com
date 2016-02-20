@@ -17,6 +17,7 @@ This guide provides a cheat sheet for bash functions that I use frequently.
 The commands start fairly simply with a handful of more advanced commands and gotchas towards the end.
 
 ## Hello world
+
 1. Create a file called `hello-world` with the following contents
 ```
 #!/bin/bash
@@ -40,7 +41,7 @@ executable written in another language later on.
 ```
 You should see `Hello, World!` printed in your terminal.
 
-## Basic Commands:
+## The basics
 
 Printing to the terminal:
 ```
@@ -64,87 +65,22 @@ bad_var=1.1
 ```
 Style Tip: local variable names should use lowercase letters and underscores
 
-
-Redirecting program output to stdout and stderr:
-```
-happy_command > stdout.log # write stdout to file (overrides exists content)
-sad_command 2> stderr.log # write stderr to file
-mixed_command &> combined.log # write both stdout and stderr to file
-happy_again >> stdout.log # add additional `>` to redirections to append rather than override
-```
-
-Redirecting the output of one command as input to another:
-```
-# prints line containing the word "ERROR"
-cat debug.log | grep "ERROR"
-
-# pretty print JSON response from API
-curl -H "Content-Type: application/json" http://my-api/users | jq '.'
-
-# Sort directories by size
-du -h | sort -rh
-```
-
-Assign output of command to variable
-```
-# simple
-output="$(echo 'hello!')"
-
-# more complex
-first_user_id="$(curl -H "Content-Type: application/json" http://my-api/users | jq -r '.users[0].id')"
-```
-
-
-## Allowing your script to take arguments
-
-Positional Arguments
-```
-# Usage
-./my-script hello world
-
-echo "$0" # ./test, script path
-echo "$1" # hello, first positional arg
-echo "$2" # world, second arg
-
-echo "$#" # 2, total number of args
-echo "$*" # "hello world", expands all args as a single word
-echo "$@" # "hello" "world", expands all args as separate words
-
-# shift
-echo "$1" # hello
-shift # discard first arg, slide remaining args to left
-echo "$1" # world
-```
-
-Environment variables + Parameter substitution:
-```
-# Usage
-MY_VAR="some-value" ANOTHER_VAR=1 ./my-script
-
-# declare a required environment variable
-: ${REQUIRED_VAR:?} # will throw an error if variable is not set
-
-# declare an optional environment variable
-: ${OPTIONAL_VAR:=} # sets OPTIONAL_VAR to empty string if unset
-
-# declare an optional environment variable with a default value
-: ${OPTIONAL_VAR:=default_value} # sets OPTIONAL_VAR to `default_value` if unset
-
-# make variable available to child processes
-export MY_VAR
-./my-child-script
-
-# assign default value to positional arg
-arg="${1:-default_value}" # sets `arg` to first positional arg if set, `default_value` otherwise
-```
-Note: The leading `:` prevents bash from running the variable contents as a command
-
 Integer Arithmetic
 ```
 echo "$((2+2))" # 4
 a=1
 (( a++ )) # sets `a` to 2
 echo "$(( a++ ))" # still prints 2, then sets value to 3. Be careful with pre vs post increment!
+```
+
+Create arrays of values:
+```
+# Note that values are space delimited instead of commas unlike most languages
+values=( 1 2 3 4 ) # initialize array of integers
+strings=( "foo" "bar" "asdf" ) # or strings
+
+echo "${values[0]}" # prints first value in array, "1"
+echo "${#values[@]} # prints length of array, "4"
 ```
 
 If statements
@@ -156,65 +92,6 @@ elif [[ $condition1 ]]; then
 else
   command2
 fi
-```
-
-For loops
-```
-# print 1 through 10 inclusive
-for i in $(seq 1 10); do # be sure not to quote "$(...)"
-  echo "$i"
-done
-
-# print each arg
-for arg in "$@"; do
-  echo "$arg"
-done
-```
-
-Iterate over lines in a file
-```
-while read line; do
-  echo "$line"
-done < input.txt
-```
-
-Case statements
-```
-#!/bin/bash
-case "$1" in
-
-  start)
-    echo "Starting..."
-    ;;
-
-  stop | shutdown)
-    echo "Stopping..."
-    ;;
-
-  *)
-    # default case
-    echo "ERROR: Unrecognized option '$1'"
-    echo "Usage: my_script {start|stop|shutdown}"
-    ;;
-esac
-```
-
-Command line flags:
-```
-# invoke script with ./my_script -p foo -c bar
-while getopts "c:p:" opt; do
-  case $opt in
-    c)
-      c_value="$OPTARG"
-      ;;
-    p)
-      p_value="$OPTARG"
-      ;;
-    *)
-      echo "Unknown argument: $opt"
-      ;;
-  esac
-done
 ```
 
 Test Operators
@@ -244,62 +121,161 @@ if [[ -f $file ]] # true if file exists, false for directories
 if [[ -d $dir ]] # true if directory exists, false for files
 ```
 
-Get the previous command's exit code:
+For loops
 ```
-somd_cmd
-echo "$?"
-```
-
-Run commands in sequence:stopping if a command exits non-zero:
-```
-# stops if command exits non-zero
-mkdir tmp && do-work && rm -r tmp
-
-# stops if command exits zero
-update-file || create-file
-
-# run all commands regardless of exit value
-do-work ; cat output.log
-```
-
-Run commands sequentially, stopping after a command exits zero:
-```
-```
-
-Capture PID and write to file:
-```
-# replace current process with another process
-echo $$ > $pidfile
-exec some_process
-
-# write pid of background process
-some_process &
-echo $! > $pidfile
-```
-
-Generate timestamps:
-```
-date +%Y-%m-%d # prints "2016-01-10"
-
-date +%F # same result, shorthand for "+%Y-%m-%d"
-
-date +%s # prints "1452484369", seconds since Epoch
-         # useful for generating "unique" filenames
-```
-
-Create arrays of values:
-```
-# Note that values are space delimited instead of commas unlike most languages
-values=( 1 2 3 4 ) # initialize array of integers
-strings=( "foo" "bar" "asdf" ) # or strings
-
-echo "${values[0]}" # prints first value in array, "1"
-echo "${#values[@]} # prints length of array, "4"
+# print 1 through 10 inclusive
+for i in $(seq 1 10); do # be sure not to quote "$(...)"
+  echo "$i"
+done
 
 # iterate over values in array
 for i in "${values[@]}"; do
   echo "${i}"
 done
+
+```
+
+Iterate over lines in a file
+```
+while read line; do
+  echo "$line"
+done < input.txt
+```
+
+Case statements
+```
+case "$1" in
+
+  start)
+    echo "Starting..."
+    ;;
+
+  stop | shutdown)
+    echo "Stopping..."
+    ;;
+
+  *)
+    # default case
+    echo "ERROR: Unrecognized option '$1'"
+    echo "Usage: my_script {start|stop|shutdown}"
+    ;;
+esac
+```
+
+Create functions
+```
+pretty_print() { # 'function' keyword is optional, omitting it is more portable
+  echo "****** $1 ******"
+}
+
+result="$(pretty_print "hello world!")"
+```
+Note: there is no `return` keyword, only writing to stdout/err
+
+## Inputs, outputs, and redirection
+
+Redirecting program output to stdout and stderr:
+```
+happy_command > stdout.log # write stdout to file (overrides exists content)
+sad_command 2> stderr.log # write stderr to file
+mixed_command &> combined.log # write both stdout and stderr to file
+happy_again >> stdout.log # add additional `>` to redirections to append rather than override
+```
+
+Piping the output of one command as input to another:
+```
+# prints line containing the word "ERROR"
+cat debug.log | grep "ERROR"
+
+# pretty print JSON response from API
+curl -H "Content-Type: application/json" http://my-api/users | jq '.'
+
+# Sort directories by size
+du -h | sort -rh
+```
+
+Assign output of command to variable
+```
+# simple
+output="$(echo 'hello!')"
+
+# more complex
+first_user_id="$(curl -H "Content-Type: application/json" http://my-api/users | jq -r '.users[0].id')"
+```
+
+## Allowing your script to take arguments
+
+Positional Arguments
+```
+# Usage
+./my-script hello world
+
+echo "$0" # ./test, script path
+echo "$1" # hello, first positional arg
+echo "$2" # world, second arg
+
+echo "$#" # 2, total number of args
+echo "$*" # "hello world", expands all args as a single word
+echo "$@" # "hello" "world", expands all args as separate words
+
+# shift
+echo "$1" # hello
+shift # discard first arg, slide remaining args to left
+echo "$1" # world
+
+# print each arg
+for arg in "$@"; do
+  echo "$arg"
+done
+```
+
+Environment variables + Parameter substitution:
+```
+# Usage
+MY_VAR="some-value" ANOTHER_VAR=1 ./my-script
+
+# declare a required environment variable
+: ${REQUIRED_VAR:?} # will throw an error if variable is not set
+
+# declare an optional environment variable
+: ${OPTIONAL_VAR:=} # sets OPTIONAL_VAR to empty string if unset
+
+# declare an optional environment variable with a default value
+: ${OPTIONAL_VAR:=default_value} # sets OPTIONAL_VAR to `default_value` if unset
+
+# make variable available to child processes
+export MY_VAR
+./my-child-script
+
+# assign default value to positional arg
+arg="${1:-default_value}" # sets `arg` to first positional arg if set, `default_value` otherwise
+```
+Note: The leading `:` prevents bash from running the variable contents as a command
+
+Command line flags:
+```
+# invoke script with ./my_script -p foo -c bar
+while getopts "c:p:" opt; do
+  case $opt in
+    c)
+      c_value="$OPTARG"
+      ;;
+    p)
+      p_value="$OPTARG"
+      ;;
+    *)
+      echo "Unknown argument: $opt"
+      ;;
+  esac
+done
+```
+
+## Working with files and directories
+
+View and edit files
+```
+less output.log # view, but not change a file
+vim main.go # a powerful file editor with a bit of a learning curve...
 ```
 
 Filepath operations:
@@ -316,16 +292,6 @@ tmpdir="$(mktemp -d /tmp/my-project.XXXXX)"
 trap '{ rm -rf ${tmpdir}; }' EXIT # remove tmpdir on script exit
 ```
 
-Create functions
-Note: there is no `return` keyword, only writing to stdout/err
-```
-pretty_print() { # 'function' keyword is optional, omitting it is more portable
-  echo "****** $1 ******"
-}
-
-result="$(pretty_print "hello world!")"
-```
-
 Changing directories (the nice way)
 ```
 # GOOD, reset working dir to original value when finished
@@ -339,60 +305,6 @@ cd "${WORKSPACE}"
 exit 0
 ```
 
-## Decent Practices
-
-Setting reasonable default options
-```
-# exit immediately if a command exits non-zero
-set -e
-
-# treat unset variables as errors
-set -u
-
-# prints commands as they are executed
-# Nice for logging in prod/CI environments, but probably omit if your script is
-# intended to be run by humans
-set -x
-
-# sets return value of pipeline to non-zero if any command returns non-zero
-set -o pipefail
-
-# one-liner
-set -eux -o pipefail
-```
-
-Locating other files safely
-```
-# gets the relative location of this script
-my_dir="$(dirname $0)"
-
-# get the absolute location of this script, following symlinks
-my_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-project_dir="$( cd "${my_dir}/.." && pwd )" # assumes MY_DIR is one level below PROJECT_DIR
-
-pushd "${project_dir}"
-  cat ./data/config.yml
-  ./scripts/other_script
-popd
-```
-Credit to [this](http://stackoverflow.com/a/246128) stackoverflow answer.
-
-Boilerplate file template:
-```
-#!/bin/bash
-
-set -eux -o pipefail
-
-my_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-project_dir="$( cd "${my_dir}/.." && pwd )"
-
-: ${REQUIRED_VAR:?}
-: ${OPTIONAL_VAR:=}
-: ${DEFAULT_VAR:=default-value}
-
-# YOUR CODE HERE
-```
-
 Extract file or directory names
 ```
 FILE_PATH=/home/foo/my-file.txt
@@ -401,19 +313,67 @@ FILE="$(basename $FILE_PATH)" # "my-file.txt"
 DIR="$(dirname $FILE_PATH)" # "/home/foo"
 ```
 
-Sourcing utility functions
+Find and delete files by name
 ```
-# ./utils
+# recursively finds all files and directories named 'test' under /some/dir
+find /some/dir -name "test"
+
+# recursively find all txt files under current directory
+find . -name "*.txt" -type f
+
+# delete all .tmp files
+find . -name "*.tmp" -type f -delete
+# or
+find . -name "*.tmp" -type f | xargs rm
+```
+
+Archive and Extract files:
+```
+# Create archive of all files in current directory in
+# tar format, compressed with gzip
+tar czvf my_files.tgz ./*
+
+# Extract to given directory
+tar xzvf my_files.tgz -C /some/output/dir
+```
+
+Sourcing utility functions from other files
+```
+# ./utils.sh
 pretty_print() {
   # do work
 }
 
 # ./my_script
-my_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-source "${my_dir}/utils"
+source ./utils.sh
 
 pretty_print "hello world!"
+```
+Note: The `.sh` extension is useful for indicating files that should be sourced
+
+## Working with processes
+
+Get the previous command's exit code:
+```
+set -e # Exit if any command exits non-zero
+
+# do some setup
+
+set +e # temporarily allow commands to exit non-zero
+failing_command
+exit_code="$?" # returns exit code of the previous command
+set -e
+
+if [ "${exit_code}" = "0" ]; then
+  echo "Failed to do something. Exiting..."
+  # do some cleanup
+  exit 1
+fi
+```
+
+Make a command non-interactive
+```
+yes | rm ./*.txt # equivalent to `rm -f *.txt`
 ```
 
 Determine OS
@@ -432,14 +392,37 @@ case "${platform}" in
 esac
 ```
 
-Archive and Extract files:
+Run commands in sequence:
 ```
-# Create archive of all files in current directory in
-# tar format, compressed with gzip
-tar czvf my_files.tgz ./*
+# stops if command exits non-zero
+mkdir tmp && do-work && rm -r tmp
 
-# Extract to given directory
-tar xzvf my_files.tgz -C /some/output/dir
+# stops if command exits zero
+update-file || create-file
+
+# run all commands regardless of exit value
+do-work ; cat output.log
+```
+
+Capture PID and write to file:
+```
+# replace current process with another process, writing process ID to a file
+echo $$ > $pidfile
+exec some_process
+
+# launch process in the background, writing background process ID to a file
+some_process &
+echo $! > $pidfile
+```
+
+Generate timestamps (useful for logging):
+```
+date +%Y-%m-%d # prints "2016-01-10"
+
+date +%F # same result, shorthand for "+%Y-%m-%d"
+
+date +%s # prints "1452484369", seconds since Epoch
+         # useful for generating "unique" filenames
 ```
 
 ## HTTP utilities
@@ -457,7 +440,7 @@ curl -vL google.com # GET request with verbose output and follows redirects
 curl -H "Content-Type: application/json" -X POST -d '{"key": "value"}' localhost:8080 # post JSON data
 ```
 
-## Text processing commands
+## Working with text
 
 Print a multi-line string using a heredoc
 ```
@@ -517,69 +500,95 @@ tail -n1 ./some_file # prints last line in file
 tail -f ./process.log # streams file contents as new lines are added, useful for debugging
 ```
 
-View and edit files
-```
-less output.log # view, but not change a file
-vim main.go # a powerful file editor with a bit of a learning curve...
-```
-
 Counting things
 ```
 wc -w ./some-file # prints word count
 wc -l ./some-file # line count
 wc -m ./some-file # char count
+
+echo "$output" | wc -w # also accepts stdin
 ```
 
-Find / Delete files by name
+Searching for text
 ```
-# recursively finds all files and directories named 'test' under /some/dir
-find /some/dir -name "test"
-
-# recursively find all txt files under current directory
-find . -name "*.txt" -type f
-
-# delete all .tmp files
-find . -name "*.tmp" -type f -delete
-# or
-find . -name "*.tmp" -type f | xargs rm
-```
-
-Make a command non-interactive
-```
-yes | rm ./*.txt # equivalent to `rm -f *.txt`
-```
-
-Search with regex
-```
-# print lines matching regex
-grep 'value' ./some-file
-echo "$VAR" | grep 'value' # can be used with pipes
-grep -i 'vAluE' ./some-file # case insensitive
-grep -v 'value' ./some-file # inverse, print lines not matching regex
+# print lines matching pattern
+grep 'foo' ./some-file
+grep -i 'fOo' ./some-file # case insensitive
+grep -v 'bar' ./some-file # inverse, print lines not matching regex
+grep 'fo\+' ./some-file # regex, use egrep for better regex support
+echo "${var}" | grep 'foo' # can be used with pipes
 
 # check for running process name
-ps ax | grep mysql
+ps aux | grep mysql
 ```
 
 Regex
-Notes:
-- Uses POSIX regex, e.g. `[[:digit:]]` instead of `\d`
-- To avoid unexpected behavior, always store regex in a variable and
-  do not quote the variable after the `=~` operator.
-- Regex is tough to read at the best of times, bash syntax makes it harder.
-  Please use sparingly.
 ```
-REGEX='[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}'
-if [[ "10.10.0.255" =~ $REGEX ]]; then # do not surround regex variable in quotes
+regex='[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}'
+if [[ "10.10.0.255" =~ ${regex} ]]; then # do not surround regex variable in quotes
   echo "Match!"
 else
   echo "No match..."
 fi
 
 # capture groups
-REGEX='[a-z]+_([a-z]+)' # capture letters following `_`
-[[ "first_last" =~ $REGEX ]]
+regex='[a-z]+_([a-z]+)' # capture letters following `_`
+[[ "first_last" =~ ${regex} ]]
 last_name="${BASH_REMATCH[1]}" # [0] is the full match, [1] is the first capture group
+```
+Notes:
+- Uses POSIX regex, e.g. `[[:digit:]]` instead of `\d`
+- To avoid unexpected behavior, always store regex in a variable and
+  do not quote the variable after the `=~` operator.
+
+## Patterns I like
+
+Setting reasonable default options
+```
+# exit immediately if a command exits non-zero
+set -e
+
+# treat unset variables as errors
+set -u
+
+# prints commands as they are executed
+# Nice for logging in prod/CI environments, but probably omit if your script is
+# intended to be run by humans
+set -x
+
+# sets return value of pipeline to non-zero if any command returns non-zero
+set -o pipefail
+
+# one-liner
+set -eux -o pipefail
+```
+
+Locating other files safely
+```
+# get the absolute location of this script, following symlinks
+my_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+project_dir="$( cd "${my_dir}/.." && pwd )" # assumes MY_DIR is one level below PROJECT_DIR
+
+pushd "${project_dir}"
+  cat ./data/config.yml
+  ./scripts/other_script
+popd
+```
+
+Boilerplate file template:
+```
+#!/bin/bash
+
+set -eux -o pipefail
+
+my_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+project_dir="$( cd "${my_dir}/.." && pwd )"
+
+: ${REQUIRED_VAR:?}
+: ${OPTIONAL_VAR:=}
+: ${DEFAULT_VAR:=default-value}
+
+# YOUR CODE HERE
 ```
 
 ## Pitfalls
@@ -595,3 +604,5 @@ last_name="${BASH_REMATCH[1]}" # [0] is the full match, [1] is the first capture
 - rm -rf "${output_dir}/*" # rm -rf /* if ${output_dir} is empty...
 - Use ${HOME} instead of ~ in scripts
   - ~ does not expand when quoted
+- "bash: ./my-script: Permission denied"
+  - Make sure script is executable (`chmod +x ./my-script`)
