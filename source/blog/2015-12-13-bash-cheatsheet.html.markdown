@@ -608,19 +608,99 @@ project_dir="$( cd "${my_dir}/.." && pwd )"
 
 ## Pitfalls
 
-- = vs -eq
-- whitespace in variable assignment and conditionals
-  - val = "some value" # syntax error, should be val="some value"
-  - if ["${val}" = "some value"] # syntax error, needs spaces around []
-- pipefail
-- quoting variables
-  - rm -rf $my_dir # rm -rf my files/my_dir
-  - [ -z $VAL ] # [ -z ], syntax error if VAL is empty
-- rm -rf "${output_dir}/*" # rm -rf /* if ${output_dir} is empty...
-- Use ${HOME} instead of ~ in scripts
-  - ~ does not expand when quoted
-- "bash: ./my-script: Permission denied"
-  - Make sure script is executable (`chmod +x ./my-script`)
+Forgetting to make script executable:
+```
+# BAD
+echo "${script_contents}" > ./my-script
+./my-script # prints "bash: ./my-script: Permission denied"
+
+# GOOD
+chmod +x ./my-script
+./my-script # runs as expected
+```
+
+Misusing lexical comparison operators (`>` and `<`) for integer comparisons:
+```
+# BAD
+[ 5 > 10 ] # evaluates to true since 5 is alphabetically greater than 1
+
+# GOOD
+[ 5 -gt 10 ] # evaluates to false as expected
+```
+
+Adding whitespace around variable assignment and conditionals:
+```
+# BAD
+val = "some value" # attempts to run val as a command, prints "No command 'val' found"
+
+# GOOD
+val="some value" # performs variable assignment as expected
+
+# BAD
+[1 -eq 1] # syntax error, "[1: command not found"
+
+# GOOD
+[ 1 -eq 1 ] # performs comparison as expected
+```
+
+Using pipes without `set -o pipefail`:
+```
+# BAD
+set -e # only considers the exit code of the last command run in a pipeline
+
+curl http://example.comm | tee output.txt # curl exits non-zero, but tee exits 0
+echo "continuing..."                      # bash continues to run the rest of the script
+
+# GOOD
+set -e -o pipefail # sets pipeline exit-code to non-zero if any command exits non-zero
+
+curl http://example.comm | tee output.txt # curl fails, script exits as expected
+echo "continuing..." # not executed
+```
+
+Leaving variables unquoted:
+```
+# use quotes to prevent word splitting
+tmp_dir="/home/my stuff/tmp" # note the space in filepath
+
+# BAD
+rm -rf ${my_dir} # lack of quotes causes to args to be pass '/home/my' and 'stuff/tmp'
+
+# GOOD
+rm -rf "${my_dir}" # quotes ensure variable is passed as a single arg
+
+# use quotes to handle empty vars
+ENV_VAR=""
+
+# BAD
+[ -z ${ENV_VAR} ] # expands to [ -z ], returns syntax error
+
+# GOOD
+[ -z "${ENV_VAR}" ] # expands to [ -z "" ], no syntax error
+```
+
+Passing a potentially empty variable to `rm -rf`:
+```
+# caller forgets to set OUTPUT_DIR
+
+# BAD
+rm -rf "${OUTPUT_DIR}/*" # expands to 'rm -rf /*', yikes
+
+# GOOD
+: ${OUTPUT_DIR:?} # script exits if OUTPUT_DIR is unset
+rm -rf "${OUTPUT_DIR}/*"
+```
+Note: [Here's](http://www.pcworld.com/article/2871653/scary-steam-for-linux-bug-erases-all-the-personal-files-on-your-pc.html) an example of this pitfall in action.
+
+Using `~` in scripts:
+```
+# BAD
+home_dir="~" # ~ does not expand when quoted
+
+# GOOD
+home_dir="${HOME}" # expands as expected
+```
+
 ## Further Reading
 
 [1] http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html
