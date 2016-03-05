@@ -483,8 +483,13 @@ echo "$CSV" | cut -d ',' -f2 # prints "last", changes delimiter
 
 Replace characters in string
 ```
-CSV="first,last,address"
-echo "$WORDS" | sed 's/,/\n/g' # prints "first\nlast\naddress"
+csv="first,last,address"
+
+# bash built-in, `//` replaces all occurrences, a single `/` replaces the first
+echo "${csv//,/_}" # outputs "first_last_address"
+
+# sed, supports file operations as well
+echo "${csv}" | sed 's/,/_/g' # prints "first_last_address"
 ```
 
 Remove lines matching a pattern
