@@ -48,7 +48,7 @@ echo "Hello, world!"
 echo "Something went wrong..." >&2
 ```
 
-Variables:
+Declaring variables:
 ```
 # integers
 count=10
@@ -61,12 +61,22 @@ bad_var=1.1
 ```
 Style Tip: local variable names should use lowercase letters and underscores
 
+Accessing variables:
+```
+welcome_message="Hello!"
+
+echo "Running script: $0"
+echo "Welcome message: ${welcome_message}"
+```
+Style Tip: I prefer using the `${}` syntax for accessing variables as it allows for parameter substitution and avoids string interpolation edge cases.
+
 Integer Arithmetic
 ```
-echo "$((2+2))" # 4
+echo "$((2+2))" # prints 4
 a=1
 (( a++ )) # sets `a` to 2
-echo "$(( a++ ))" # still prints 2, then sets value to 3. Be careful with pre vs post increment!
+echo "$(( a++ ))" # still prints 2, then sets value to 3.
+                  # Be careful with pre vs post increment!
 ```
 
 Create arrays of values:
@@ -81,9 +91,9 @@ echo "${#values[@]} # prints length of array, "4"
 
 If statements
 ```
-if [[ $condition0 ]]; then
+if [[ <some_condition> ]]; then
   command0
-elif [[ $condition1 ]]; then
+elif [[ <another_condition> ]]; then
   command1
 else
   command2
@@ -107,21 +117,21 @@ if [[ -z "$1" ]] # succeeds if $1 is unset
 if [[ -n "$1" ]] # succeeds if $1 is set
 
 # boolean operators
-if [[ ! $condition ]] # invert result
-if [[ $condition0 ]] && [[ $condition1 ]] # and
-if [[ $condition0 ]] || [[ $condition1 ]] # or
+if [[ ! <condition> ]] # invert result
+if [[ <condition0> ]] && [[ <condition1> ]] # and
+if [[ <condition0> ]] || [[ <condition1> ]] # or
 
 ## file operators
-if [[ -e $file ]] # true if file or directory exists
-if [[ -f $file ]] # true if file exists, false for directories
-if [[ -d $dir ]] # true if directory exists, false for files
+if [[ -e "${file}" ]] # true if file or directory exists
+if [[ -f "${file}" ]] # true if file exists, false for directories
+if [[ -d "${dir}" ]] # true if directory exists, false for files
 ```
 
 For loops
 ```
 # print 1 through 10 inclusive
 for i in $(seq 1 10); do # be sure not to quote "$(...)"
-  echo "$i"
+  echo "${i}"
 done
 
 # iterate over values in array
@@ -134,7 +144,7 @@ done
 Iterate over lines in a file
 ```
 while read line; do
-  echo "$line"
+  echo "${line}"
 done < input.txt
 ```
 
@@ -152,7 +162,7 @@ case "$1" in
 
   *)
     # default case
-    echo "ERROR: Unrecognized option '$1'"
+    echo "ERROR: Unrecognized option $1"
     echo "Usage: my_script {start|stop|shutdown}"
     ;;
 esac
@@ -247,12 +257,13 @@ export MY_VAR
 arg="${1:-default_value}" # sets `arg` to first positional arg if set, `default_value` otherwise
 ```
 Note: The leading `:` prevents bash from running the variable contents as a command
+Style Tip: I find it helpful to use ALL CAPS to indicate variable that are passed in from the environment.
 
 Command line flags:
 ```
 # invoke script with ./my_script -p foo -c bar
 while getopts "c:p:" opt; do
-  case $opt in
+  case "${opt}" in
     c)
       c_value="$OPTARG"
       ;;
@@ -260,7 +271,7 @@ while getopts "c:p:" opt; do
       p_value="$OPTARG"
       ;;
     *)
-      echo "Unknown argument: $opt"
+      echo "Unknown argument: ${opt}"
       ;;
   esac
 done
@@ -285,12 +296,13 @@ Create temporary files:
 # Create a directory in /tmp
 # 'XXXXX' will be replaced with random characters
 tmpdir="$(mktemp -d /tmp/my-project.XXXXX)"
+
 trap '{ rm -rf ${tmpdir}; }' EXIT # remove tmpdir on script exit
 ```
 
 Changing directories (the nice way)
 ```
-# GOOD, reset working dir to original value when finished
+# GOOD
 pushd "${WORKSPACE}" # changes working dir to ${WORKSPACE}
   # do some work
 popd # changes working dir back to original value
@@ -303,10 +315,10 @@ exit 0
 
 Extract file or directory names
 ```
-FILE_PATH=/home/foo/my-file.txt
+file_path=/home/foo/my-file.txt
 
-FILE="$(basename $FILE_PATH)" # "my-file.txt"
-DIR="$(dirname $FILE_PATH)" # "/home/foo"
+FILE="$(basename ${file_path})" # "my-file.txt"
+DIR="$(dirname ${file_path})" # "/home/foo"
 ```
 
 Find and delete files by name
@@ -402,13 +414,15 @@ do-work ; cat output.log
 
 Capture PID and write to file:
 ```
+pidfile=/path/to/process.pid
+
 # replace current process with another process, writing process ID to a file
-echo $$ > $pidfile
+echo $$ > ${pidfile}
 exec some_process
 
 # launch process in the background, writing background process ID to a file
 some_process &
-echo $! > $pidfile
+echo $! > ${pidfile}
 ```
 
 Generate timestamps (useful for logging):
@@ -468,13 +482,13 @@ EOF
 
 Print the n-th item in a line
 ```
-WORDS="this is only a test"
-echo "$WORDS" | cut -d ' ' -f3 # prints "only", index starts at 1
-echo "$WORDS" | cut -d ' ' -f1-3 # prints "this is only"
-echo "$WORDS" | cut -d ' ' -f1,f5 # prints "this test"
+words="this is only a test"
+echo "${words}" | cut -d ' ' -f3 # prints "only", index starts at 1
+echo "${words}" | cut -d ' ' -f1-3 # prints "this is only"
+echo "${words}" | cut -d ' ' -f1,f5 # prints "this test"
 
-CSV="first,last,address"
-echo "$CSV" | cut -d ',' -f2 # prints "last", changes delimiter
+csv="first,last,address"
+echo "${csv}" | cut -d ',' -f2 # prints "last", changes delimiter
 ```
 
 Replace characters in string
@@ -507,7 +521,7 @@ wc -w ./some-file # prints word count
 wc -l ./some-file # line count
 wc -m ./some-file # char count
 
-echo "$output" | wc -w # also accepts stdin
+echo "${output}" | wc -w # also accepts stdin
 ```
 
 Searching for text
