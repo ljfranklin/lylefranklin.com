@@ -65,7 +65,6 @@ Accessing variables:
 ```
 welcome_message="Hello!"
 
-echo "Running script: $0"
 echo "Welcome message: ${welcome_message}"
 ```
 Style Tip: I prefer using the `${}` syntax for accessing variables as it allows for parameter substitution and avoids string interpolation edge cases.
