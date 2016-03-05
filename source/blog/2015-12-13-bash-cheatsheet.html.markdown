@@ -1,20 +1,16 @@
-## Bash Prog Intro Notes
 
-http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html
-http://tldp.org/LDP/abs/html/
-http://mywiki.wooledge.org/BashPitfalls
-https://google.github.io/styleguide/shell.xml
+I feel like writing Bash is like building something with hot glue.
+When you try it for the first time, you'll probably make a big mess and burn yourself.
+As you use it a bit more, you can slap things together really quickly but the end result won't be very sturdy or pretty.
 
-## Intro:
-I feel like writing bash is like building something with hot glue.
-When try it for the first time, you'll probably make a big mess and burn yourself.
-As you get a little more experienced, you can slap things together really quickly but the end result won't be very sturdy or pretty.
+The goal of this guide is to serve as a quick primer to writing scripts in Bash, as well as sharing a handful style tips and pitfalls.
+However, the biggest advice I can give about Bash is to write as little of it as possible.
+The syntax is often unintuitive and scripts written in Bash tend to be fairly brittle.
+Here's my favorite line from Google's [shell style guide][1]: "Shell should only be used for small utilities or simple wrapper scripts."
 
-Google has a nice little bash style guide I definitely recommend.
-Here's my favorite line: "Shell should only be used for small utilities or simple wrapper scripts."
-
-This guide provides a cheat sheet for bash functions that I use frequently.
-The commands start fairly simply with a handful of more advanced commands and gotchas towards the end.
+I hopes this guide helps you write readable, robust, and short Bash scripts.
+If you find yourself writing longer scripts or needing the more advanced features of Bash, please consider reaching for a stronger scripting language like Ruby or Python.
+Your team mates and future self will thank you.
 
 ## Hello world
 
@@ -611,3 +607,9 @@ project_dir="$( cd "${my_dir}/.." && pwd )"
   - ~ does not expand when quoted
 - "bash: ./my-script: Permission denied"
   - Make sure script is executable (`chmod +x ./my-script`)
+## Further Reading
+
+[1] http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html
+[2] http://tldp.org/LDP/abs/html/
+[3] http://mywiki.wooledge.org/BashPitfalls
+[4] https://google.github.io/styleguide/shell.xml
