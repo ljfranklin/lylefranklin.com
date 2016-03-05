@@ -570,9 +570,9 @@ set -eux -o pipefail
 
 Locating other files safely
 ```
-# get the absolute location of this script, following symlinks
-my_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-project_dir="$( cd "${my_dir}/.." && pwd )" # assumes MY_DIR is one level below PROJECT_DIR
+# get the absolute location of this script
+my_dir="$( cd "$( dirname "$0" )" && pwd )"
+project_dir="$( cd "${my_dir}/.." && pwd )" # assumes my_dir is one level below PROJECT_DIR
 
 pushd "${project_dir}"
   cat ./data/config.yml
@@ -586,7 +586,7 @@ Boilerplate file template:
 
 set -eux -o pipefail
 
-my_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+my_dir="$( cd "$( dirname "$0" )" && pwd )"
 project_dir="$( cd "${my_dir}/.." && pwd )"
 
 : ${REQUIRED_VAR:?}
