@@ -1,4 +1,6 @@
 
+# Bash Primer
+
 I feel like writing Bash is like building something with hot glue.
 When you try it for the first time, you'll probably make a big mess and burn yourself.
 As you use it a bit more, you can slap things together really quickly but the end result won't be very sturdy or pretty.
