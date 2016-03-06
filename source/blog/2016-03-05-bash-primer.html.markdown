@@ -17,6 +17,19 @@ Your team mates and future self will thank you.
 
 ## Table of Contents<a name="table-of-contents"></a>
 
+- Hello world
+- The basics
+- Inputs, outputs, and redirection
+- Script arguments
+- Files and directories
+- Processes
+- HTTP utilities
+- Text processing
+- Patterns I like
+- Pitfalls
+- Further reading
+
+<!--
 - [Hello world](#hello-world)
 - [The basics](#the-basics)
 - [Inputs, outputs, and redirection](#inputs-outputs-and-redirection)
@@ -28,6 +41,7 @@ Your team mates and future self will thank you.
 - [Patterns I like](#patterns-i-like)
 - [Pitfalls](#pitfalls)
 - [Further reading](#further-reading)
+-->
 
 ## Hello world<a name="hello-world"></a>
 
