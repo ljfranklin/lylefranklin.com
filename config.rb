@@ -13,6 +13,9 @@ ignore "images/*.orig.*"
 # Don't include vendored styles
 ignore "stylesheets/vendor/*"
 
+set :markdown_engine, :redcarpet
+set :markdown, :fenced_code_blocks => true, :smartypants => true, :autolink => true
+
 after_configuration do
   # Import Bower assests
   bower_directory = 'bower_components'

@@ -5,6 +5,7 @@ gem "middleman", "~>3.3.8"
 gem "middleman-minify-html"
 gem "middleman-livereload", "~> 3.3.0"
 gem "middleman-blog"
+gem "redcarpet"
 
 # Used to detect JS runtime
 gem "rb-inotify"
