@@ -59,6 +59,85 @@ The first chapter sprints through examples ranging from "Hello world", image gen
 The target audience for this book seems to be at least intermediate developers that have experience from other similar languages to draw from.
 While this makes it a quick read for more experienced developers, beginner students might have trouble with the pacing.
 
+## Chapter 2: Program Structure
+
+I like the authors' style tip to type acronyms in the same case, preferring `escapeHTML` over `escapeHtml` (pg 28).
+I've used both styles in the past, but capitalizing acronyms more closely matches how they're typed outside of code.
+
+---
+
+> in Go there is no such thing as an uninitialized variable - pg 30
+
+I appreciate the consistent experience this provides.
+For example incrementing a map value can be written as:
+
+```
+someMap[key]++
+```
+
+instead of:
+
+```
+if someMap[key] == nil {
+  someMap[key] = 0
+}
+someMap[key]++
+```
+
+---
+
+When I initially read the paragraph describing short variable declarations (pg 30), I was disappointed the authors didn't mention the danger of accidentally shadowing variables.
+For example, the following declares a new local variable `someFile` that shadows the package level variable of the same name, an easy mistake to make:
+
+```
+var someFile string
+
+func processFile() {
+  someFile, err := os.Open("/path/to/file")
+  ...
+}
+```
+
+Instead you can declare `err` separately and use normal assignment to avoid shadowing:
+
+```
+var someFile string
+
+func processFile() {
+  var err error
+  someFile, err = os.Open("/path/to/file")
+  ...
+}
+```
+
+However, the authors loop back to point common mistake later in the chapter (pg 49).
+Nice catch!
+
+---
+
+I like the idea of Go's type aliases to make the code more readable and type safe.
+The authors use temperature types as an example (pg 39):
+
+```
+type Celsius float64
+type Fahrenheit float64
+```
+
+So far I've not used this feature much in my own code, definitely something to do more often.
+
+---
+
+> It is an error to import a package and then not refer to it - pg 43
+
+I love the design philosophy that code with objectively poor style should be a compiler error rather than a warning.
+Little features like this help keep the code tidy without reliance on linters and vetters (not to say that `golint` and `go vet` aren't still useful).
+
+---
+
+I was surprised to find out about the `init()` function (pg 44) as I haven't seen it used in the code bases I've seen.
+You can specify any number of `func init() {...}` methods in a package and they will be run automatically when the program starts.
+[Effective Go](https://golang.org/doc/effective_go.html#init) mentions that it can be useful for verifying pre-conditions like whether an environment variable is set.
+
 ## Citations
 
 1. Donovan, A. A., & Kernighan, B. W. (2015). The Go programming language. Addison-Wesley.
