@@ -138,6 +138,64 @@ I was surprised to find out about the `init()` function (pg 44) as I haven't see
 You can specify any number of `func init() {...}` methods in a package and they will be run automatically when the program starts.
 [Effective Go](https://golang.org/doc/effective_go.html#init) mentions that it can be useful for verifying pre-conditions like whether an environment variable is set.
 
+## Chapter 3: Basic Data types
+
+This chapter gave several examples of more advanced usage of the `fmt` package.
+These include using `fmt.Printf("%08b\n", x)` to print a `uint8` with padding zeros up to a length of 8 (pg 54) and
+printing a right-aligned set of numbers with `fmt.Printf("x = %8.3f\n", x)` to print an 8 character field with 3 digits of precision (pg 57).
+The next CLI I work on is getting some additional pretty printing.
+
+---
+
+The authors offered a lovely explanation for a question I never thought to ask:
+why do functions that always return a non-negative result like `len()` usually return an `int` instead of `uint`?
+Their example demonstrates a subtle overflow error that could be encountered when dealing with a `uint` (pg 54):
+
+```
+medals := []string{"gold", "silver", "bronze"}
+for i := len(medals) - 1; i >= 0; i-- {
+  fmt.Println(medals[i])
+}
+```
+
+In this example, on the fourth iteration `i` would jump from zero to the max `uint` value resulting in an index out of bounds error.
+The authors described this error as "calamitous", which is a word I'd like to work into an email sometime soon.
+
+---
+
+The authors included two wonderful math based examples to illustrate the type system:
+generating a 3D sine wave mesh in SVG (pg 58) and an image of the Mandelbrot set (pg 62).
+Makes me want to brush up on my math skills a bit.
+Also shout out to this [Numberphile video](https://www.youtube.com/watch?v=NGMRB4O922I) for teaching me what a Mandelbrot set is.
+
+---
+
+Ironically my favorite part of this chapter was only tangentially related to Go.
+The authors include a concise and informative explanation of the relationship between
+ASCII, Unicode, and UTF-8 (pg 67).
+I've not yet worked on a project that had non-ASCII character encoding as a requirement,
+definitely something I need to read up on.
+
+For example, I would have thought that `len(someString)` was an okay thing to do, not so when Unicode is involved.
+Calling `len(someUTFString)` will give you the length of the string in bytes, but some characters may take up more that one byte.
+Instead you can call `utf8.RunCountInString(s)` or use `range` which automatically does the UTF-8 conversion (pg 69, 70).
+
+---
+
+Small nitpick, but I wouldn't expect a `basename` function to remove the file extension (pg 72).
+That is all, carry on.
+
+---
+
+I'm glad I read the section on using `iota` to generate enums (pg 77).
+This keyword had alway felt a little magic to me, so it's nice to understand how to works and
+how it can be extended to more complex implementations like generating powers of 1024 (pg 78).
+
+
+## TODO
+
+The rest of the chapters...
+
 ## Citations
 
 1. Donovan, A. A., & Kernighan, B. W. (2015). The Go programming language. Addison-Wesley.
