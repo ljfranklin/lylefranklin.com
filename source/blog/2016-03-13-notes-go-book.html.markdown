@@ -1,6 +1,3 @@
----
-published: false
----
 
 # Notes from The Go Programming Language
 
