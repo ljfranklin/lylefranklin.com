@@ -188,6 +188,85 @@ I'm glad I read the section on using `iota` to generate enums (pg 77).
 This keyword had alway felt a little magic to me, so it's nice to understand how to works and
 how it can be extended to more complex implementations like generating powers of 1024 (pg 78).
 
+## Chapter 4: functions
+
+One of the features I miss from other languages is default parameters (pg 120).
+In a language like Java, method overloading provides a decent workaround.
+But in Go, the only workaround I've seen is to "abuse" var-args to allow arguments to be omitted.
+
+---
+
+Nice, succinct explanation of how Go is *pass by value* (pg 120).
+Functions always receive a copy of the argument, but if that argument is a
+reference type (e.g. pointer, slice, map) the function might modify the contents of that reference.
+
+---
+
+The authors hint at it, but for the sake of readability I usually only use multiple return
+values when the second value is an error or a boolean (pg 125).
+I've seen code that uses multi-return values as a convenience with other variable types,
+and it always feels unexpected.
+
+I also liked the explanation that a boolean as a second return value (typically named *ok*) should be used for methods
+that have only one possible failure mode, such as a cast (wrong type) or lookup (key not found) (pg 128).
+
+---
+
+I really don't like named returned values, makes it harder to follow a function's dataflow (pg 127).
+I've heard the argument that it makes it more clear *what* the function is returning, but
+if it's not clear already, the function is probably poorly named.
+
+---
+
+Nice, concise example showing retries with a timeout and exponential back-off (pg 130).
+
+```
+deadline := time.Now().Add(timeout)
+for tries := 0; time.Now().Before(deadline); tries++ {
+  ...
+  time.Sleep(time.Second << uint(tries)) // exponential back-off
+}
+```
+
+---
+
+I've been bitten by attempting to capture an iteration value in the past (pg 141).
+In this example, the variable `dir` represents a storage location for a value, not
+the value itself.
+Each iteration through the loop reuses the same `dir` variable, so the `os.RemoveAll` call
+will attempt to remove only the last assigned value of `dir`.
+The fix is to redeclare the iteration variable inside the loop: `dir := dir`.
+
+```
+for _, dir := range tempDirs {
+  ...
+  rmdirs = append(rmdirs), func() {
+    os.RemoveAll(dir) // BAD: removes the last dir `len(tempDirs)` times
+  })
+}
+```
+
+---
+
+Big fan of the `defer` keyword (pg 146).
+The closeness of "Open()" and "defer Close()" calls allows programmers to visually pattern match.
+A missing `defer` "looks wrong", while a missing "Close()" at the end of a long function is easy to forget.
+
+---
+
+The `trace` function is a clever one-liner to print timing info, totally using this (pg 146):
+
+```
+defer trace("bigSlowOperation")()
+```
+
+```
+func trace(msg string) func() {
+  start := time.Now()
+  log.Printf("enter %s", msg)
+  return func() { log.Printf("exit %s (%s)", msg, time.Since(start)) }
+}
+```
 
 ## TODO
 
