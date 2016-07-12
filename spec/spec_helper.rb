@@ -44,7 +44,7 @@ end
 Capybara.ignore_hidden_elements = false
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, {
-    :js_errors => true
+    :js_errors => false # travis-ci throws random JS errors
   })
 end
 Capybara.javascript_driver = :poltergeist
