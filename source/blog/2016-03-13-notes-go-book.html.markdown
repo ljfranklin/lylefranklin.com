@@ -294,6 +294,20 @@ func trace(msg string) func() {
 }
 ```
 
+## Chapter 6: Methods
+
+The authors lay out a nice convention: If any method needs a pointer receiver, then all methods on that struct
+should have a pointer receiver (pg 158).
+Makes it immediately obvious whether you should pass a pointer around vs a value.
+
+---
+
+Nice example of building a set using a bit vector (pg 167), reminds me of a few interviews I've had...
+
+---
+
+Kudos again to the language designers. Capitalize methods to make them public, super simple! (pg 168)
+
 ## TODO
 
 The rest of the chapters...
