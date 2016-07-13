@@ -188,7 +188,33 @@ I'm glad I read the section on using `iota` to generate enums (pg 77).
 This keyword had alway felt a little magic to me, so it's nice to understand how to works and
 how it can be extended to more complex implementations like generating powers of 1024 (pg 78).
 
-## Chapter 4: functions
+## Chapter 4: Composite types
+
+Clear explanation of the relationship between slices and arrays (pg 84).
+Not only does a slice abstract away growing the underlying array,
+it also allows multiple slices to share the same underlying array.
+
+---
+
+As with many structures in Go, a `nil` slice is equivalent to an empty slice (pg 87).
+Good advice to make your zero values useful.
+
+---
+
+I appreciate how easy it is to compare objects for equality in Go (pg 104) as
+compared to languages like Java which mixes `==` and `.Equals()` for even simple objects.
+
+---
+
+Another useful JSON tag is '-' which omits the field from serialization (pg 108).
+Also, if you're generating a JSON string you'll always want to use tags to remove capitalization.
+
+---
+
+Nicely formatted program output on pg 112.
+Good reminder that attention to detail matters :)
+
+## Chapter 5: Functions
 
 One of the features I miss from other languages is default parameters (pg 120).
 In a language like Java, method overloading provides a decent workaround.
