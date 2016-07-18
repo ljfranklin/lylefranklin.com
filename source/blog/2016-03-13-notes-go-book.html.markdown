@@ -308,6 +308,92 @@ Nice example of building a set using a bit vector (pg 167), reminds me of a few 
 
 Kudos again to the language designers. Capitalize methods to make them public, super simple! (pg 168)
 
+## Chapter 7: Interfaces
+
+> what makes Go's interfaces so distinctive is that they are *satisfied implicitly*. - pg 171
+
+I've found this feature helpful for testing via dependency injection.
+If I want to inject a struct from a library that doesn't have a corresponding interface,
+I can simply create my own interfaces which that library object implicitly satisfies.
+
+---
+
+The authors give a nice tip for ensuring your concrete class implements a given interface.
+Add an assignment from your concrete class to an unused variable that has the desired interface type (pg 177):
+
+```
+package bytes
+
+// ensure Buffer satisfies io.Writer
+var _ io.Writer = new(bytes.Buffer)
+
+type Buffer struct{
+  ...
+}
+```
+
+---
+
+> A nil interface value, which contains no value at all,
+  is not the same as an interface value containing a pointer that happens to be nil - pg 184
+
+I've been bitten by this "subtle trap" as the authors describe it.
+Here's the authors' example (pg 185):
+
+```
+const debug = true
+
+func main() {
+  var buf *bytes.Buffer
+  if debug {
+    buf = new(bytes.Buffer)
+  }
+  f(buf)
+  if debug {
+    ...
+  }
+}
+
+func f(out io.Writer) {
+  if out != nil {
+    out.Write([]byte("done!\n")) // possible nil pointer panic
+  }
+}
+```
+
+In Go, interfaces are composed of two parts: the *dynamic type* and the *dynamic value*.
+While `out` in this example might have a value of `nil`, its type is `*bytes.Buffer`.
+Since at least one of these parts is non-nil, `out != nil` is true.
+The fix in this case is to declare `buf` with an interface type (`var buf io.Writer`) so
+that the dynamic type is `nil` until an assignment occurs.
+
+---
+
+`tabwriter` is another nice formatting package I'll have to check out (pg 188).
+This package prints neatly formatted tables with rows and columns.
+
+---
+
+I feel like the "hello, world" example for most modern programming languages
+should now be an HTTP server instead of printing to a terminal (pg 191).
+The ease of spinning up a server in Go in so few lines using only standard libs
+was what got me excited to initially learn Go.
+
+---
+
+Always use `io.WriteString` to write a string to an `io.Writer`.
+Another nice optimization from the authors (pg 209).
+
+---
+
+> Interfaces are only needed when there are two or more concrete types that
+  must be dealt with in a uniform way. - pg 216
+
+As I mentioned earlier, I disagree with this statement when dependency injection is involved.
+I've found myself creating interfaces that were implemented by a single struct, then
+generating a fake implementation from that interface using something like
+[counterfeiter](https://github.com/maxbrunsfeld/counterfeiter).
+
 ## TODO
 
 The rest of the chapters...
