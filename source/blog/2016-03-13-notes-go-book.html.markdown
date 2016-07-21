@@ -394,6 +394,47 @@ I've found myself creating interfaces that were implemented by a single struct, 
 generating a fake implementation from that interface using something like
 [counterfeiter](https://github.com/maxbrunsfeld/counterfeiter).
 
+## Chapter 8: Goroutines and channels
+
+The authors give definitions to two styles of concurrent programming:
+Communicating Sequential Processes (CSP) and Shared Memory Multithreading (pg 217).
+CSP involves passing messages between multiple independent processes, but variables are typically
+local to each process. Channels plus goroutines are an example of this style.
+Shared memory multithreading involves multiple concurrent threads accessing shared variables.
+This style makes use of locks and atomic structures.
+
+---
+
+> when we say *x* happens before *y*, we don't mean merely that *x* occurs earlier in time
+than *y*; we mean that it is guaranteed to do so - pg 226
+
+Explanations similar to this first helped me to understand concurrent programming.
+"I ran it on my laptop and everything happened in the right order" is not good enough
+for parallel programming.
+
+---
+
+My biggest takeaway from this chapter is to be careful to avoid goroutine leaks (pg 233).
+These can occur when a function exits, but one or more goroutines are stuck trying to send or
+receive on a channel.
+These goroutines cannot be garbage collected in this state, a gouroutine leak.
+
+The authors give a couple suggestions to avoid leaks, including
+using buffered channels if the know the number of items in advance or using a WaitGroup (pg 237).
+
+---
+
+We hit this exact bug with `time.Tick` leaking goroutines on a past project (pg 246).
+The server have very low CPU usage for about three days, then quickly spiked to 100%.
+We weren't cleaning up `time.Tick` correctly, and after three days the goroutine leaks
+caused the server to crash.
+Creating a new timer and explicitly stopping it on exit fixed things up.
+
+---
+
+Another good tip, always call `waitGroup.Add` outside the goroutine that will call `waitGroup.Done` (pg 238).
+This ensures that all the `Add` calls are executed before the `waitGroup.Wait` call is executed.
+
 ## TODO
 
 The rest of the chapters...
