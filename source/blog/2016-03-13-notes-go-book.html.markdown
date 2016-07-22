@@ -435,6 +435,46 @@ Creating a new timer and explicitly stopping it on exit fixed things up.
 Another good tip, always call `waitGroup.Add` outside the goroutine that will call `waitGroup.Done` (pg 238).
 This ensures that all the `Add` calls are executed before the `waitGroup.Wait` call is executed.
 
+## Chapter 9: Concurrency with shared variables
+
+This chapter provides a well-written explanation of common concurrency gotchas,
+how to use mutexes to combat them, and plenty of code examples.
+Good chapter to bookmark to check your work at a later date.
+
+---
+
+As with `file.Open` followed by `defer file.Close`, `mutex.Lock` followed by `mutex.Unlock`
+provides a nice visual pattern that ensures developers don't forget to release a lock (pg 264).
+
+---
+
+I've seen codebases that explicitly name methods to indicate they are unsafe for concurrent
+access, e.g. `depositUnsafe`.
+This indicates to that it is the caller's responsibility to acquire any relevant locks.
+
+---
+
+> intuitions about concurrency are not to be trusted! - pg 269
+
+Good reminder to be diligent, ensure all variable access happens in a concurrently safe way.
+Attempting to convince yourself that you don't need to bother will probably end in sadness.
+
+---
+
+The `sync.Once` method provides a clean mechanism for a one-time lazy initialization that
+is safe for concurrent access (pg 270).
+
+---
+
+`go test -race` is a great low-cost way of detecting race conditions (pg 272).
+I make sure to run this flag as part of CI on any Go project.
+
+---
+
+The authors share an example of a non-blocking cache for HTTP requests (pg 277).
+The implementation is a bit tricky to get exactly correct, but the authors' do
+a fine job of explaining their work.
+
 ## TODO
 
 The rest of the chapters...
