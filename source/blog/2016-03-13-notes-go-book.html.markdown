@@ -475,6 +475,110 @@ The authors share an example of a non-blocking cache for HTTP requests (pg 277).
 The implementation is a bit tricky to get exactly correct, but the authors' do
 a fine job of explaining their work.
 
+## Chapter 10: Package and the Go tools
+
+Section 10.6, Packages and Naming, had several tips for manageable package names (pg 289).
+Specifically, I like the advice to avoid package names that "stutter".
+For example, prefer `strings.NewReader` over `strings.NewStringReader` as the package name
+already hints that the Reader should be used with objects of type `string`.
+
+---
+
+> An internal package may be imported only by another package that is inside the tree
+rooted at the parent of the `internal` directory - pg 298
+
+I didn't realize internal packages, a package with a path segment named `internal`,
+was more than a conversion and is actually enforced by the compiler.
+
+---
+
+I wish the authors would have touched on package management tools a bit in this chapter.
+While the addition of `vendor` imports helps, there still doesn't seem to be a de-facto
+package manager for Golang projects yet.
+Some use tools like Godep or Glide, some do `git clone` plus `git add` in vendor,
+while others just roll custom dependency management scripts.
+The Go creators were so opinionated about many of the language features, so
+built-in dependency management seems strangely omitted.
+
+## Chapter 11: testing
+
+> In practice, writing test code is not much different from writing the original program itself - pg 302
+
+Like production code, tests have inputs and outputs, must be maintained, and must be read by others.
+I've seen a huge amount of copy-paste tests where the author didn't seem to mind
+the increased maintenance costs because they were "just tests", tisk tisk.
+
+---
+
+Although the authors advocate for the minimal testing approach provided by `go test`,
+I'm a big fan of [Ginkgo](http://onsi.github.io/ginkgo/) and its matcher library
+[Gomega](http://onsi.github.io/gomega/).
+Ginkgo is a BDD (Behavior Driven Development) testing framework similar to Ruby's RSpec.
+The BDD style maintains an emphasis on readability and using the same framework across
+different projects keeps tests looking consistent across different Golang codebases.
+
+---
+
+> The author of a test should strive to help the programmer who must diagnose a test failure - pg 307
+
+When writing expectations in tests, I try to add a helpful text message if the failure message would
+not be enough to diagnose the error on its own.
+Here's an example using Gomega:
+
+```
+Expect(foundItem).To(BeTrue())
+```
+
+This produces an unhelpful error on failure:
+
+```
+Expected
+  <bool>: false
+to be true
+```
+
+To help, we can add some additional text on failure:
+
+```
+Expect(foundItem).To(BeTrue(), "Expected to find item with ID '%s', but it does not exist", itemID)
+```
+
+Much better output:
+
+```
+Expected to find item with ID 'foo', but it does not exist
+Expected
+  <bool>: false
+to be true
+```
+
+---
+
+> `const password = "correcthorsebatterystaple"`
+
+Nice [xkcd reference](https://xkcd.com/936/).
+
+---
+
+Not of a fan of overriding package level methods as a mechanism for providing "fake" implementations
+during testing (pg 313).
+I would rather use dependency injection to explicitly pass an object or function that encapsulates the
+desired behavior, passing a real object in the production code and a fake object in the test code.
+This pattern makes it obvious which methods are under test and which methods belong to collaborators
+on which our object under test depends.
+
+---
+
+One feature of `go test` that I was unaware of: `go test -bench=.` (pg 321).
+This will run all test functions whose names begin with `Benchmark` and report their
+execution times.
+
+Similarly, `godoc` is able to find tests whose names start with `Example` and
+embed these examples in the generated godoc (pg 326).
+Even better, running `godoc -play` will turn those examples into a runnable example
+powered by the Go Playground.
+See an example [here](https://golang.org/pkg/time/#Sleep).
+
 ## TODO
 
 The rest of the chapters...
