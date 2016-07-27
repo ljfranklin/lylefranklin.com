@@ -602,9 +602,24 @@ type Instance struct {
 }
 ```
 
-## TODO
+## Chapter 13: Low-level programming
 
-The rest of the chapters...
+This was another chapter I only skimmed.
+It includes examples about invoking existing C code from a Go program as well as
+usage of the aptly named `unsafe` package that lets you step around some of Go's
+type safety mechanisms.
+Again, the authors sum it up so well:
+"Avoid *reflect* and *unsafe*; come back to these chapters only if you must - pg 366".
+
+---
+
+> Meanwhile, happy Go programming. We hope you enjoy writing Go as much as we do - pg 366
+
+<img class="loading-image" src="/images/gopher.jpg" alt="The Go gopher in aviator headgear" width="100%"/>
+
+The Go gopher was designed by Renee French. (http://reneefrench.blogspot.com/)
+The design is licensed under the Creative Commons 3.0 Attributions license.
+Read this article for more details: https://blog.golang.org/gopher
 
 ## Citations
 
