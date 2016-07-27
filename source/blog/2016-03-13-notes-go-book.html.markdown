@@ -579,6 +579,29 @@ Even better, running `godoc -play` will turn those examples into a runnable exam
 powered by the Go Playground.
 See an example [here](https://golang.org/pkg/time/#Sleep).
 
+## Chapter 12: Reflection
+
+This chapter contains several detailed reflection examples that show the power of the
+Golang `reflection` library, but I only gave this chapter a quick skim.
+As the authors suggest in the final paragraph of the chapter (pg 352),
+reflection is a dangerous tool that is easy to misuse.
+That said, I'll definitely refer back to this chapter if I ever find an excuse to use
+reflection.
+
+The one time I've used reflection in Golang was to interact with struct tags as shown on pg 348.
+These tags will be familiar if you've used the Golang JSON parsing library.
+I used reflection in a similar way to marshall the response from another program,
+which had a strange tab separated table output, into a struct.
+The struct ended up looking a little like this:
+
+```
+type Instance struct {
+  ID string `col:"0", row:"2"`
+  Name string `col:"1", row:"2"`
+  ...
+}
+```
+
 ## TODO
 
 The rest of the chapters...
