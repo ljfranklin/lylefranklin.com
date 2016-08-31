@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/ljfranklin
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://lylefranklin.com
+  * I am ljfranklin (https://keybase.io/ljfranklin) on keybase.
+  * I have a public key with fingerprint C15F 116B DAA9 AC25 0E20  2752 9486 66B3 EEC6 A0F0
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "01010bc44758d9745c12111dc418b679c62b764aba703248695753e1e43bd9b6cc7d0a",
+            "fingerprint": "c15f116bdaa9ac250e202752948666b3eec6a0f0",
+            "host": "keybase.io",
+            "key_id": "948666b3eec6a0f0",
+            "kid": "01010bc44758d9745c12111dc418b679c62b764aba703248695753e1e43bd9b6cc7d0a",
+            "uid": "8039503ad220a37ba32e680aa5084d19",
+            "username": "ljfranklin"
+        },
+        "service": {
+            "hostname": "lylefranklin.com",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1472609944,
+    "expire_in": 157680000,
+    "prev": "fe6884bbf363ba26878ce52be8e13e375b2802514ce9d49022873bd2935fde04",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.56
+Comment: https://keybase.io/crypto
+
+yMIrAnicrZJ5SFRBHMfXDtGFBek+qOwVXaw6M2/etVFhYZgW0S1kLDPvzbrP3d7b
+3r411/IfwzIlgwhUyCSCSJICC1Q6sBPKzKCLgv6QiIKCDpYgKmqe5H/92cwfw/zm
+8/3+DuZOYKLPn4UH6uoubf0xI2voZmfKt+ve6vYDArWNtBA6IMTY2MHiBku64Zhp
+CCEBQL6pjrEiqYamYEmHCEJo6BiqVFY0XUZUkTGhRAEiwqqsSYokMsiwSA2Nyrqu
+GIAIQSFiWlXMSTim5XJbHUoRCGVqEKIRHUmAIYAUCWncQZapyJguExABXBi1k56C
+F0dJkhWaNo/xS3isvH/w/7nu1JidCkRNAiIxEAJEVCgREZNVQIgEVGxAzQOTzLHI
+XsbpeHXEIVYsblpCfVDg8RpTZ95ovV7GmXScjVOFur2XOyQc27V1O85fo66bSIY8
+tZtOePh+RsN/jcLUtAw+Ta6oYU7StC0hBDmpu6bnDLGCZKBpGAcFVpswHRY2PUJS
+eMF8eXlYDbeM8A5UTGlElEVKkKwqqs4kRJnKoMhERaJIBUiCWGeagTWAkKrw4SBN
+lCIGA1jwWttn2UKIZ3JJFbdMmlUWcVMOE+pvDVZO8mX5fdmTJ3i/zOfPzRv/e5na
+HN/Rlp7KXU7Rsrb+pbXTipvWL64c/uhb+XrnokB5ervz8VPdqvzR81NuV4+Yb5dc
+eve0q6SgMPoUZJ7ldXxZOWvGybLqZ1dSdUXLZ1440f47NrJpsHvek5/1sLz75YeG
+F8eL12U/ymRyqiqatl2+H2VLz5ZOLzoXmNqW9/1m5ykyXPyw2di4uvNHW+HPnpK1
+pPEJXNj5LbsZ+1PFQuu9yt6+uUN9gRVzCroqevyPd183Nuy4fvD5UHnrrIbcb5tm
+B8u23G05Xdrxas7h7v7RwIL8SQXyvky8ceBGtO1kxSA80/v5Ys/m9j1vXjdfu1ry
+y/51dUvzh68tojL/05GuNYuF0UNXjr1/8AcvRD+c
+=h1mw
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/ljfranklin
+
+==================================================================
