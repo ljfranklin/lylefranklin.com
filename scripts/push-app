@@ -11,4 +11,5 @@ PROJECT_DIR=$(cd $SCRIPTS_DIR/.. && pwd)
 pushd $PROJECT_DIR
   cf zero-downtime-push $APP_NAME -f $MANIFEST_FILE
   cf map-route $APP_NAME $EXTERNAL_URL
+  cf map-route $APP_NAME www.$EXTERNAL_URL
 popd
